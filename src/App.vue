@@ -1,32 +1,57 @@
 <template>
-  <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+    <v-tabs
+      v-model="tab"
+      background-color="deep-purple accent-4"
+      right
+      dark
+      icons-and-text
+    >
+      <v-tabs-slider></v-tabs-slider>
+
+      <v-tab to="/">
+        Home
+        <v-icon>mdi-home</v-icon>
+      </v-tab>
+
+      <v-tab to="/shop">
+        Productos
+        <v-icon>mdi-store</v-icon>
+      </v-tab>
+
+      <v-tab to="/login">
+        Ingresar
+        <v-icon>mdi-lock-open-check-outline</v-icon>
+      </v-tab>
+
+      <v-tab to="/myCart">
+        <span class="my-0">2</span>
+        <v-icon>mdi-cart-variant</v-icon>
+      </v-tab>
+    </v-tabs>
+
+  </v-app-bar>
+
+    <v-main>
+      <router-view/>
+    </v-main>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
 
-nav {
-  padding: 30px;
-}
+export default {
+  name: 'App',
 
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+  data: () => {
+    return {
+      tab: null
+    }
+  },
+};
+</script>
