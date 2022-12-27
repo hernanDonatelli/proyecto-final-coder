@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="shop">
     <shop-component />
   </div>
 </template>
@@ -15,5 +15,8 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+#shop{
+  background-color: #fafafa;
+}
 </style>
