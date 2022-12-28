@@ -21,7 +21,7 @@
 
     <v-card-actions>
       <v-btn v-if="producto.stock == 0" depressed disabled> Sin Stock </v-btn>
-      <v-btn v-if="producto.stock > 0" color="amber darken-2" text>
+      <v-btn :id="`btn-add-${producto.id}`" v-if="producto.stock > 0" color="amber darken-2" text>
         Agregar
       </v-btn>
 
@@ -58,7 +58,7 @@ export default {
     };
   },
   props: {
-    producto: Object,
+    producto: Object
   },
 };
 </script>

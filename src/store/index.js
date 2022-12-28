@@ -15,6 +15,9 @@ export default new Vuex.Store({
     },
     getProducts(state){
       return state.productos;
+    },
+    getAdmin(state){
+      return state.userActive.admin;
     }
   },
   mutations: {

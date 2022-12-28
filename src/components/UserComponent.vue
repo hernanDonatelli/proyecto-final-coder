@@ -1,10 +1,11 @@
 <template>
     <div v-if="$store.getters.getUserActive" class="d-flex align-center">
-        <p class="mb-0">Bienvenido, <span>{{ $store.getters.getUserActive }}</span></p>
+        <p class="mb-0">Bienvenido, <span>{{ $store.getters.getUserActive.nombre }}</span></p>
         <v-btn
         @click="logOut"
+        small
         class="mx-3"
-        color="error">
+        color="amber darken-1">
             Salir
         </v-btn>
     </div>
@@ -21,7 +22,7 @@ import {mapMutations} from 'vuex';
             logOut(){
                 this.logOutUser();
 
-                this.$router.push('/login');
+                this.$router.push('/');
             }
         },
     }

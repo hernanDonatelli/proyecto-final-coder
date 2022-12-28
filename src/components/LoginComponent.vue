@@ -15,7 +15,8 @@
               required
             ></v-text-field>
 
-            <v-text-field class="mb-10"
+            <v-text-field
+              class="mb-10"
               v-model="password"
               :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
               :rules="[rules.required, rules.min]"
@@ -45,18 +46,21 @@
             </v-btn>
 
             <p class="mt-5">
-            No estás Registrado? Hazlo <a to="/register">aquí</a>
-          </p>
+              No estás Registrado?
+              <v-btn
+                to="/register"
+                text
+                color="amber darken-4"
+                >
+                Hazlo AQUI
+              </v-btn>
+            </p>
 
-          <div id="alert" class="hidden">
-            <v-alert
-            text
-            type="error"
-            icon="mdi-cloud-alert"
-          >
-            Debe completar los campos para el ingreso!
-          </v-alert>
-          </div>
+            <div id="alert" class="hidden">
+              <v-alert text type="error" icon="mdi-cloud-alert">
+                Debe completar los campos para el ingreso!
+              </v-alert>
+            </div>
           </v-form>
         </div>
       </v-col>
@@ -65,7 +69,7 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from 'vuex';
+import { mapMutations, mapActions } from "vuex";
 
 export default {
   name: "LoginComponent",
@@ -90,8 +94,8 @@ export default {
     this.getUsersAPI();
   },
   methods: {
-    ...mapMutations(['modifiedUserActive']),
-    ...mapActions(['getUsersAPI']),
+    ...mapMutations(["modifiedUserActive"]),
+    ...mapActions(["getUsersAPI"]),
 
     validate() {
       this.$refs.form.validate();
@@ -102,26 +106,28 @@ export default {
     resetValidation() {
       this.$refs.form.resetValidation();
     },
-    checkUser(){
-      if(!this.email && !this.password){
-        document.getElementById('alert').classList.remove('hidden');
-        document.getElementById('alert').classList.add('visible');
+    checkUser() {
+      if (!this.email && !this.password) {
+        document.getElementById("alert").classList.remove("hidden");
+        document.getElementById("alert").classList.add("visible");
 
         setTimeout(() => {
-          document.getElementById('alert').classList.remove('visible');
-          document.getElementById('alert').classList.add('hidden');
+          document.getElementById("alert").classList.remove("visible");
+          document.getElementById("alert").classList.add("hidden");
         }, 2500);
-      }else{
-        const userFinded = this.$store.state.usersRegistered.find(user => user.email == this.email && user.password == this.password);
+      } else {
+        const userFinded = this.$store.state.usersRegistered.find(
+          (user) => user.email == this.email && user.password == this.password
+        );
 
-        if(userFinded){
+        if (userFinded) {
           //acceder al store y modificar userActive
-          this.modifiedUserActive(userFinded.nombre);
-          this.$router.push('/');
+          this.modifiedUserActive(userFinded);
+          this.$router.push("/");
           // Object.assign(this.$data, this.$options.data());
         }
       }
-    }
+    },
   },
 };
 </script>
@@ -137,17 +143,15 @@ export default {
   opacity: 0;
   transition: visibility 0s 1s, opacity 1s linear;
 }
-h1.title{
-  font-family: Rubik;
-}
-v-container{
+
+v-container {
   height: 100vh;
 }
-.title{
+.title {
   letter-spacing: 0.001rem;
   font-family: Roboto;
   text-transform: uppercase;
-  color: #6D4C41;
+  color: #6d4c41;
   font-weight: 600;
 }
 </style>
