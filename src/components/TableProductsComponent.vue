@@ -97,7 +97,17 @@
                 <v-col cols="12">
                   <v-text-field v-model="img" label="URL imagen"></v-text-field>
                 </v-col>
-                <v-col cols="6">
+
+                <v-col cols="12">
+                  <v-textarea
+                    v-model="descripcion"
+                    name="input-7-1"
+                    label="Descripcion del producto"
+                    hint="Letras, numeros, signos, etc..."
+                  ></v-textarea>
+                </v-col>
+
+              <v-col cols="6">
                   <v-text-field v-model="stock" label="Stock"></v-text-field>
                 </v-col>
                 <v-col cols="6">
@@ -165,7 +175,7 @@ export default {
       stock: null,
       categoria: "",
       id: null,
-      value: null,
+      descripcion: ""
     };
   },
 
@@ -187,6 +197,7 @@ export default {
       this.stock = idSeleccionado.stock;
       this.categoria = idSeleccionado.categoria;
       this.img = idSeleccionado.img;
+      this.descripcion = idSeleccionado.descripcion;
     },
 
     putEditProduct() {

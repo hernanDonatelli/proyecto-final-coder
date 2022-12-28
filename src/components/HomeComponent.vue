@@ -1,6 +1,5 @@
 <template>
- <div>
-  <h1>Home</h1>
+ <div id="home">
  </div>
 </template>
 
@@ -25,4 +24,11 @@ export default {
 </script>
 
 <style scoped>
+#home{
+  height: 100vh;
+  background-image: url(@/assets/hero.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 </style>

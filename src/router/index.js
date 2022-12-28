@@ -66,7 +66,7 @@ router.beforeEach((to, from, next) => {
     if (!store.state.userActive){
       next('/login');
     }else{
-      if(!store.state.userActive.admin === true){
+      if(!store.state.userActive.admin){
         next('/acceso-denegado');
       }else{
         next();

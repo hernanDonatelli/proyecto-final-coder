@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     userActive: null,
     usersRegistered: [],
-    productos: []
+    productos: [],
+    myCart: []
   },
   getters: {
     getUserActive(state){

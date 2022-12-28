@@ -21,7 +21,7 @@
 
     <v-card-actions>
       <v-btn v-if="producto.stock == 0" depressed disabled> Sin Stock </v-btn>
-      <v-btn :id="`btn-add-${producto.id}`" v-if="producto.stock > 0" color="amber darken-2" text>
+      <v-btn :id="`btn-add-${producto.id}`" v-if="producto.stock > 0" color="amber accent-4" text>
         Agregar
       </v-btn>
 
@@ -73,11 +73,11 @@ export default {
   justify-content: space-around;
 }
 .v-card__title {
-  font-family: "Rubik";
-  font-size: 1.4rem;
+  font-family: Oswald;
+  font-size: 1.2rem;
   font-weight: 300;
-  /* text-transform: uppercase; */
-  color: rgba(120, 144, 156, .8);
+  text-transform: uppercase;
+  color: rgb(109, 76, 65);
 }
 p.price {
   color: rgb(109, 76, 65);

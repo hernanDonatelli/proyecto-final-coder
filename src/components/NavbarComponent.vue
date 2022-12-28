@@ -72,7 +72,7 @@
           <v-divider class="divider my-10" />
 
           <!-- Seccion Administradores -->
-          <h3 class="pl-3 mb-3">Administradores</h3>
+          <h3 v-if="this.getAdmin()" class="pl-3 mb-3">Administradores</h3>
           <v-list-item v-if="this.getAdmin()">
             <v-list-item-icon>
               <v-icon>mdi-store</v-icon>

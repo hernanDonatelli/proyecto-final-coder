@@ -12,32 +12,61 @@
 
             <v-row>
               <v-col xs="12" sm="3" lg="4">
-                <v-text-field v-model="createNombre" label="Nombre"></v-text-field>
+                <v-text-field
+                  v-model="createNombre"
+                  label="Nombre"
+                ></v-text-field>
               </v-col>
 
               <v-col xs="12" sm="3" lg="4">
-                <v-text-field v-model="createMarca" label="Marca"></v-text-field>
+                <v-text-field
+                  v-model="createMarca"
+                  label="Marca"
+                ></v-text-field>
               </v-col>
               <v-col xs="12" sm="3" lg="4">
-                <v-text-field v-model="createCategoria" label="Categoria"></v-text-field>
+                <v-text-field
+                  v-model="createCategoria"
+                  label="Categoria"
+                ></v-text-field>
               </v-col>
             </v-row>
 
             <v-row>
-                <v-col cols="12">
-                    <v-text-field v-model="createImg" hint="Ej: https://dominio.com/imagen.jpg" label="URL Imagen"></v-text-field>
-                </v-col>
+              <v-col cols="12">
+                <v-text-field
+                  v-model="createImg"
+                  hint="Ej: https://dominio.com/imagen.jpg"
+                  label="URL Imagen"
+                ></v-text-field>
+              </v-col>
             </v-row>
 
             <v-row>
-                <v-col xs="6">
-                    <v-text-field v-model="createStock" label="Stock"></v-text-field>
-                </v-col>
-                <v-col xs="6">
-                    <v-text-field v-model="createPrecio" label="Precio"></v-text-field>
-                </v-col>
+              <v-col cols="12">
+                <v-textarea
+                  v-model="createDescripcion"
+                  name="input-7-1"
+                  label="Descripcion del producto"
+                  hint="Letras, numeros, signos, etc..."
+                ></v-textarea>
+              </v-col>
             </v-row>
 
+            <v-row>
+              <v-col xs="6">
+                <v-text-field
+                  v-model="createStock"
+                  label="Stock"
+                ></v-text-field>
+              </v-col>
+              <v-col xs="6">
+                <v-text-field
+                  v-model="createPrecio"
+                  label="Precio"
+                ></v-text-field>
+              </v-col>
+            </v-row>
 
             <v-btn color="success" class="mr-4" @click="postCreateProduct">
               Enviar
@@ -79,6 +108,7 @@ export default {
       createPrecio: null,
       createStock: null,
       createCategoria: "",
+      createDescripcion: ""
     };
   },
   methods: {
@@ -90,6 +120,7 @@ export default {
         precio: this.createPrecio,
         stock: this.createStock,
         categoria: this.createCategoria,
+        descripcion: this.createDescripcion
       };
 
       const createProductAPI = async () => {
@@ -109,22 +140,20 @@ export default {
         console.log(response);
 
         setTimeout(() => {
-            const form = document.getElementById('createProductForm');
+          const form = document.getElementById("createProductForm");
 
-            if(form){
-                form.remove();
-                document.getElementById('createSuccess').classList.remove('hidden');
-                document.getElementById('createSuccess').classList.add('visible');
-            }
+          if (form) {
+            form.remove();
+            document.getElementById("createSuccess").classList.remove("hidden");
+            document.getElementById("createSuccess").classList.add("visible");
+          }
 
           setTimeout(() => {
-            this.$router.push('/admin-productos')
+            this.$router.push("/admin-productos");
           }, 1500);
         }, 1500);
-
       };
       createProductAPI();
-
     },
   },
 };
