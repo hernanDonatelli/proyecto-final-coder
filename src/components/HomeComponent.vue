@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapMutations } from 'vuex';
 
 export default {
   name: "HomeComponent",
@@ -18,6 +18,7 @@ export default {
     this.getUsersAPI();
   },
   methods: {
+    ...mapMutations(["loadUsers"]),
     ...mapActions(["getUsersAPI"])
   },
 };

@@ -21,7 +21,13 @@
       <user-component />
     </v-app-bar>
 
-    <v-navigation-drawer v-if="this.getUserActive()" class="pt-10" v-model="drawer" absolute temporary>
+    <v-navigation-drawer
+      v-if="this.getUserActive()"
+      class="pt-10"
+      v-model="drawer"
+      absolute
+      temporary
+    >
       <v-list nav dense>
         <v-list-item-group
           v-model="group"
@@ -54,15 +60,34 @@
             </v-list-item-title>
           </v-list-item>
 
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-logout</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>
+              <router-link to="/" @click.native="logOut">Logout</router-link>
+            </v-list-item-title>
+          </v-list-item>
+
           <v-divider class="divider my-10" />
 
           <!-- Seccion Administradores -->
+          <h3 class="pl-3 mb-3">Administradores</h3>
           <v-list-item v-if="this.getAdmin()">
             <v-list-item-icon>
               <v-icon>mdi-store</v-icon>
             </v-list-item-icon>
             <v-list-item-title>
-              <router-link to="/shop">Admin Productos</router-link>
+              <router-link to="/admin-productos">Listado Productos</router-link>
+            </v-list-item-title>
+          </v-list-item>
+
+          <v-list-item v-if="this.getAdmin()">
+            <v-list-item-icon>
+              <v-icon>mdi-database-plus</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>
+              <router-link to="/admin-create-productos">Crear Productos</router-link>
             </v-list-item-title>
           </v-list-item>
 
@@ -71,7 +96,7 @@
               <v-icon>mdi-account-group</v-icon>
             </v-list-item-icon>
             <v-list-item-title>
-              <router-link to="/shop">Admin Usuarios</router-link>
+              <router-link to="/admin-usuarios">Listado Usuarios</router-link>
             </v-list-item-title>
           </v-list-item>
 
@@ -80,7 +105,7 @@
               <v-icon>mdi-truck-delivery</v-icon>
             </v-list-item-icon>
             <v-list-item-title>
-              <router-link to="/pedidos">Admin Pedidos</router-link>
+              <router-link to="/admin-productos">Admin Pedidos</router-link>
             </v-list-item-title>
           </v-list-item>
         </v-list-item-group>
@@ -91,12 +116,15 @@
 
 <script>
 import UserComponent from "./UserComponent.vue";
-import { mapGetters } from "vuex";
+import { mapMutations, mapGetters } from "vuex";
 
 export default {
   name: "NavbarComponent",
   components: {
     UserComponent,
+  },
+  props: {
+    to: String
   },
   data() {
     return {
@@ -105,7 +133,14 @@ export default {
     };
   },
   methods: {
+    ...mapMutations(["logOutUser"]),
     ...mapGetters(["getUserActive", "getAdmin"]),
+
+    logOut() {
+      this.logOutUser();
+
+      this.$router.push("/");
+    },
   },
 };
 </script>
@@ -136,5 +171,8 @@ export default {
   border-color: rgba(255, 179, 0, 0.4);
   width: 90%;
   margin: auto;
+}
+h3{
+  color: #ffb300;
 }
 </style>

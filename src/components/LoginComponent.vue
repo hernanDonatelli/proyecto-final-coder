@@ -124,7 +124,6 @@ export default {
           //acceder al store y modificar userActive
           this.modifiedUserActive(userFinded);
           this.$router.push("/");
-          // Object.assign(this.$data, this.$options.data());
         }
       }
     },

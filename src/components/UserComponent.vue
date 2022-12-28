@@ -6,7 +6,7 @@
         small
         class="mx-3"
         color="amber darken-1">
-            Salir
+            Logout
         </v-btn>
     </div>
 </template>

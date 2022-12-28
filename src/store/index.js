@@ -18,6 +18,9 @@ export default new Vuex.Store({
     },
     getAdmin(state){
       return state.userActive.admin;
+    },
+    getRegistered(state){
+      return state.usersRegistered;
     }
   },
   mutations: {
@@ -37,18 +40,9 @@ export default new Vuex.Store({
   actions: {
     getUsersAPI: async ({commit}) =>{
       const usersAPI = await fetch('https://639c6ec816d1763ab149a523.mockapi.io/usuarios');
-      const response = await usersAPI.json();
-      const getUser = response.map(user => {
-        return{
-          email: user.email,
-          nombre: user.nombre,
-          apellido: user.apellido,
-          password: user.password,
-          admin: user.admin
-        }
-      });
+      const usersResponse = await usersAPI.json();
 
-      commit('loadUsers', getUser);
+      commit('loadUsers', usersResponse);
     },
     getProductsAPI: async ({commit}) => {
       const productsAPI = await fetch('https://639c6ec816d1763ab149a523.mockapi.io/productos');
