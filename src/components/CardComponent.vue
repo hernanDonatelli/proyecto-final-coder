@@ -83,7 +83,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['getProducts', 'getUserActive'])
+    ...mapGetters(['getProducts', 'getUserActive', 'getItemsCart'])
   }
 };
 </script>

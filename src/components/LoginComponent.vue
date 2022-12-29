@@ -1,71 +1,52 @@
 <template>
-  <v-container>
+  <v-form ref="form" v-model="valid" lazy-validation>
+    <v-text-field
+      v-model="email"
+      :rules="emailRules"
+      label="E-mail"
+      required
+    ></v-text-field>
+
+    <v-text-field
+      class="mb-10"
+      v-model="password"
+      :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+      :rules="[rules.required, rules.min]"
+      :type="show1 ? 'text' : 'password'"
+      name="input-10-1"
+      label="Password"
+      hint="Mínimo 6 caracteres"
+      counter
+      @click:append="show1 = !show1"
+    ></v-text-field>
+
     <v-row>
-      <v-col class="col-xs-12 col-sm-10 col-lg-6 mx-auto mt-10">
-        <div class="d-flex justify-center align-center">
-          <v-form ref="form" v-model="valid" lazy-validation>
-            <h1 class="text-h4 text-uppercase text-center title mb-3">Login</h1>
-
-            <v-divider class="mb-10 brown darken-1" />
-
-            <v-text-field
-              v-model="email"
-              :rules="emailRules"
-              label="E-mail"
-              required
-            ></v-text-field>
-
-            <v-text-field
-              class="mb-10"
-              v-model="password"
-              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="[rules.required, rules.min]"
-              :type="show1 ? 'text' : 'password'"
-              name="input-10-1"
-              label="Password"
-              hint="Mínimo 6 caracteres"
-              counter
-              @click:append="show1 = !show1"
-            ></v-text-field>
-
-            <v-btn
-              :disabled="!valid"
-              color="success"
-              class="mr-4"
-              @click="checkUser"
-            >
-              Ingresar
-            </v-btn>
-
-            <v-btn color="error" class="mr-4" @click="reset">
-              Limpiar Campos
-            </v-btn>
-
-            <v-btn color="warning" @click="resetValidation">
-              Limpiar Validación
-            </v-btn>
-
-            <p class="mt-5">
-              No estás Registrado?
-              <v-btn
-                to="/register"
-                text
-                color="amber darken-4"
-                >
-                Hazlo AQUI
-              </v-btn>
-            </p>
-
-            <div id="alert" class="hidden">
-              <v-alert text type="error" icon="mdi-cloud-alert">
-                Debe completar los campos para el ingreso!
-              </v-alert>
-            </div>
-          </v-form>
-        </div>
+      <v-col cols="12">
+        <v-btn
+          block
+          :disabled="!valid"
+          color="success"
+          class="mr-4"
+          @click="checkUser"
+        >
+          Ingresar
+        </v-btn>
       </v-col>
     </v-row>
-  </v-container>
+
+    <v-row>
+      <v-col class="d-flex align-center justify-center" cols="12">
+        <p class="mt-5 mr-5">No estás Registrado?</p>
+        <v-btn to="/register" text color="amber darken-4"> Hazlo AQUI </v-btn>
+      </v-col>
+    </v-row>
+
+    <div id="alert" class="hidden">
+      <v-alert text type="error" icon="mdi-cloud-alert">
+        Debe completar los campos para el ingreso!
+      </v-alert>
+    </div>
+  </v-form>
 </template>
 
 <script>
@@ -99,12 +80,6 @@ export default {
 
     validate() {
       this.$refs.form.validate();
-    },
-    reset() {
-      this.$refs.form.reset();
-    },
-    resetValidation() {
-      this.$refs.form.resetValidation();
     },
     checkUser() {
       if (!this.email && !this.password) {
@@ -141,16 +116,5 @@ export default {
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s 1s, opacity 1s linear;
-}
-
-v-container {
-  height: 100vh;
-}
-.title {
-  letter-spacing: 0.001rem;
-  font-family: Roboto;
-  text-transform: uppercase;
-  color: #6d4c41;
-  font-weight: 600;
 }
 </style>

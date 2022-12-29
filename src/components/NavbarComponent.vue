@@ -1,20 +1,20 @@
 <template>
   <div>
     <v-app-bar color="brown darken-1" dark>
-      <v-app-bar-nav-icon @click="drawer = true"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon v-if="getUserActive()" @click="drawer = true"></v-app-bar-nav-icon>
 
       <v-toolbar-title class="text-uppercase amber--text"
-        ><span class="font-weight-light">Tienda</span
-        ><span class="font-weight-black">Gourmet</span></v-toolbar-title
+        ><router-link to="/"><span class="font-weight-light">Tienda</span
+        ><span class="font-weight-black">Gourmet</span></router-link></v-toolbar-title
       >
       <v-spacer></v-spacer>
 
       <div v-if="!$store.getters.getUserActive">
-        <v-btn to="/login" small color="teal accent-3" class="mr-3"
-          ><span class="black--text">Ingresar</span></v-btn
+        <v-btn to="/login" small color="success" class="mr-3"
+          ><span class="white--text">Ingresar</span></v-btn
         >
         <v-btn to="/register" small color="grey darken-4"
-          ><span class="white--text">Registrate</span></v-btn
+          ><span class="white--text">Registrarte</span></v-btn
         >
       </div>
 
