@@ -22,6 +22,9 @@ export default new Vuex.Store({
     },
     getRegistered(state){
       return state.usersRegistered;
+    },
+    getItemsCart(state){
+      return state.myCart;
     }
   },
   mutations: {
@@ -36,6 +39,9 @@ export default new Vuex.Store({
     },
     getProductsMutation(state, productsByApi){
       state.productos = productsByApi;
+    },
+    addCartMutation(state, newProductIn){
+      state.myCart.push(newProductIn);
     }
   },
   actions: {
@@ -51,6 +57,7 @@ export default new Vuex.Store({
 
       commit('getProductsMutation', response);
     },
+
   },
   modules: {
   }

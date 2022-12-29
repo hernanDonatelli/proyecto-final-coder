@@ -40,7 +40,7 @@
               :type="show1 ? 'text' : 'password'"
               name="input-10-1"
               label="Contraseña"
-              hint="Minimo 8 caracteres"
+              hint="Minimo 6 caracteres"
               counter
               @click:append="show1 = !show1"
             ></v-text-field>
@@ -99,7 +99,7 @@ export default {
     show1: false,
     rules: {
       required: (value) => !!value || "Requerido.",
-      min: (v) => v.length >= 8 || "Min 8 caracteres",
+      min: (v) => v.length >= 6 || "Min 6 caracteres",
     },
     nombreRules: [
       (v) => !!v || "Nombre es requerido",

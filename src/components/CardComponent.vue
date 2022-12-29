@@ -21,7 +21,13 @@
 
     <v-card-actions>
       <v-btn v-if="producto.stock == 0" depressed disabled> Sin Stock </v-btn>
-      <v-btn :id="`btn-add-${producto.id}`" v-if="producto.stock > 0" color="amber accent-4" text>
+      <v-btn
+        @click="addToCart(producto.id)"
+        :id="`btn-add-${producto.id}`"
+        v-if="producto.stock > 0"
+        color="amber accent-4"
+        text
+      >
         Agregar
       </v-btn>
 
@@ -50,6 +56,8 @@
 </template>
 
 <script>
+import { mapMutations, mapGetters } from 'vuex';
+
 export default {
   name: "cardComponent",
   data() {
@@ -58,8 +66,25 @@ export default {
     };
   },
   props: {
-    producto: Object
+    producto: Object,
   },
+  methods: {
+    ...mapMutations(['addCartMutation', 'logOutUser']),
+
+    addToCart(idProduct){
+      const selectProduct = this.getProducts.find((item) => item.id == idProduct);
+
+      if(this.getUserActive){
+        this.addCartMutation(selectProduct);
+      }else{
+        this.$router.push('/acceso-denegado');
+      }
+
+    }
+  },
+  computed: {
+    ...mapGetters(['getProducts', 'getUserActive'])
+  }
 };
 </script>
 
@@ -87,18 +112,18 @@ p.price {
   padding-left: 16px;
   margin: 0;
 }
-i.heart{
+i.heart {
   width: 30px;
   height: 30px;
   font-size: 1.3rem;
-  color: rgba(120, 144, 156, .8);
+  color: rgba(120, 144, 156, 0.8);
   cursor: pointer;
   margin-right: 1rem;
-  transition: font-size .15s ease-in-out;
+  transition: font-size 0.15s ease-in-out;
 }
 
-i.heart:hover{
-  color: #FF6F00;
+i.heart:hover {
+  color: #ff6f00;
   font-size: 1.8rem;
 }
 </style>

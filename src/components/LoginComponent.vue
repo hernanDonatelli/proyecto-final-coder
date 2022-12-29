@@ -23,7 +23,7 @@
               :type="show1 ? 'text' : 'password'"
               name="input-10-1"
               label="Password"
-              hint="Mínimo 8 caracteres"
+              hint="Mínimo 6 caracteres"
               counter
               @click:append="show1 = !show1"
             ></v-text-field>
