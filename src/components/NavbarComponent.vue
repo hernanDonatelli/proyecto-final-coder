@@ -56,7 +56,9 @@
               <v-icon>mdi-cart-variant</v-icon>
             </v-list-item-icon>
             <v-list-item-title>
-              <router-link to="/myCart">Cart</router-link>
+              <router-link to="/myCart">
+                Cart  (<span>{{ this.getItemsCart().length }}</span>)
+              </router-link>
             </v-list-item-title>
           </v-list-item>
 
@@ -134,7 +136,7 @@ export default {
   },
   methods: {
     ...mapMutations(["logOutUser"]),
-    ...mapGetters(["getUserActive", "getAdmin"]),
+    ...mapGetters(["getUserActive", "getAdmin", "getItemsCart"]),
 
     logOut() {
       this.logOutUser();
@@ -142,6 +144,9 @@ export default {
       this.$router.push("/");
     },
   },
+  computed:{
+
+  }
 };
 </script>
 

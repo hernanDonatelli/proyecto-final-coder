@@ -1,69 +1,123 @@
 <template>
-  <v-container>
-    <h1 class="text-h4 text-uppercase text-center cart-title my-3">
-      <span>Mi</span>Carrito
-    </h1>
-
-    <v-divider inset class="mb-10 mt-5 brown darken-1" />
-
+  <div>
     <v-simple-table class="text-center">
       <template v-slot:default>
         <thead>
           <tr>
-            <th class="text-center">Id</th>
+            <th class="text-center">#</th>
             <th class="text-center">Producto</th>
 
             <th class="text-center">Cantidad</th>
 
             <th class="text-center">Valor Unitario</th>
 
-            <th class="text-center">Impuestos</th>
-
             <th class="text-center">Total</th>
+
+            <th class="text-center">Eliminar</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Leche de Almendras Original x 1l</td>
+          <tr v-for="(producto, index) of getItemsCart" :key="index">
+            <td>{{ index + 1 }}</td>
+            <td>{{ producto.nombre }}</td>
             <td>
-              <v-btn fab small color="amber accent-2" class="mr-5">
-                <v-icon>mdi-cart-arrow-down</v-icon>
+              <v-btn
+                v-if="producto.cantidad > 0"
+                @click="producto.cantidad--"
+                fab
+                small
+                color="amber accent-2"
+                class="mr-5"
+              >
+                <v-icon>mdi-cart-minus</v-icon>
               </v-btn>
-              1
-              <v-btn fab small color="amber accent-2" class="ml-5">
-                <v-icon>mdi-cart-arrow-up</v-icon>
+
+              <input
+                class="inputQuantity"
+                readonly
+                v-model.number="producto.cantidad"
+              />
+
+              <v-btn
+                @click="producto.cantidad++"
+                fab
+                small
+                color="amber accent-2"
+                class="ml-5"
+              >
+                <v-icon>mdi-cart-plus</v-icon>
               </v-btn>
             </td>
-            <td>$315.14</td>
-            <td>21%</td>
-            <td><strong>$381.32</strong></td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Leche de Almendras Chocolatada x 1l</td>
+            <td>${{ producto.precio }}</td>
+
             <td>
-              <v-btn fab small color="amber accent-2" class="mr-5">
-                <v-icon>mdi-cart-arrow-up</v-icon>
-              </v-btn>
-              <v-span>1</v-span>
-              <v-btn fab small color="amber accent-2" class="ml-5">
-                <v-icon>mdi-cart-arrow-down</v-icon>
+              <strong
+                >${{ (producto.precio * producto.cantidad).toFixed(2) }}</strong
+              >
+            </td>
+
+            <td>
+              <v-btn
+                @click="deleteItem(producto.id)"
+                :id="`btn-delete-${producto.id}`"
+                class="ma-2"
+                text
+                icon
+                color="red accent-3"
+              >
+                <v-icon>mdi-delete</v-icon>
               </v-btn>
             </td>
-            <td>$327.55</td>
-            <td>21%</td>
-            <td><strong>$396.66</strong></td>
           </tr>
         </tbody>
       </template>
     </v-simple-table>
-  </v-container>
+
+    <v-row v-if="subTotalCart() != 0" class="mt-3 pr-10">
+      <v-col class="d-flex flex-column justify-end pa-2">
+        <p class="text-right my-2">
+          SubTotal: <strong>${{ subTotalCart() }}</strong>
+        </p>
+
+        <p class="text-right my-2">
+          Total (+21% IVA): <strong>${{ (subTotalCart() * 1.21).toFixed(2) }}</strong>
+        </p>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "CartComponent",
+  methods: {
+    subTotalCart() {
+      const itemsInCart = this.getItemsCart.map((item) => item);
+
+      const subTotal = itemsInCart
+        .reduce(
+          (total, producto) => (total += producto.precio * producto.cantidad),
+          0
+        )
+        .toFixed(2);
+
+      return subTotal;
+    },
+
+    deleteItem(id) {
+      const itemToDelete = this.getItemsCart.find((item) => {
+       return item.id == id;
+      });
+      let index = this.getItemsCart.indexOf(itemToDelete);
+
+      this.getItemsCart.splice(index, 1);
+    },
+  },
+  computed: {
+    ...mapGetters(["getItemsCart"]),
+  },
 };
 </script>
 
@@ -71,15 +125,8 @@ export default {
 .v-data-table {
   line-height: 4.5;
 }
-.cart-title,
-.cart-title span {
-  letter-spacing: 0.001rem;
-  font-family: Roboto;
-  text-transform: uppercase;
-  color: #6d4c41;
-  font-weight: 600;
-}
-.cart-title span {
-  font-weight: 200;
+.inputQuantity {
+  width: 30px;
+  text-align: center;
 }
 </style>

@@ -4,7 +4,8 @@
       <v-col xs="12" sm="10" md="8" lg="5" class="mx-auto mt-10">
         <h1 class="text-h4 text-uppercase text-center title mb-3">Login</h1>
 
-    <v-divider class="mb-10 brown darken-1" />
+        <v-divider class="mb-10 brown darken-1" />
+
         <login-component />
       </v-col>
     </v-row>

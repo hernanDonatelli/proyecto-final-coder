@@ -69,11 +69,11 @@ export default {
     producto: Object,
   },
   methods: {
-    ...mapMutations(['addCartMutation', 'logOutUser']),
+    ...mapMutations(['addCartMutation']),
 
     addToCart(idProduct){
       const selectProduct = this.getProducts.find((item) => item.id == idProduct);
-
+      console.log(selectProduct);
       if(this.getUserActive){
         this.addCartMutation(selectProduct);
       }else{

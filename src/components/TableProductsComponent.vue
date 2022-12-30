@@ -1,11 +1,5 @@
 <template>
   <v-container>
-    <h1 class="text-h4 text-uppercase text-center registrados-title my-3">
-      <span>Nuestros</span>Productos
-    </h1>
-
-    <v-divider inset class="mb-10 mt-5 brown darken-1" />
-
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -107,7 +101,7 @@
                   ></v-textarea>
                 </v-col>
 
-              <v-col cols="6">
+                <v-col cols="6">
                   <v-text-field v-model="stock" label="Stock"></v-text-field>
                 </v-col>
                 <v-col cols="6">
@@ -175,7 +169,7 @@ export default {
       stock: null,
       categoria: "",
       id: null,
-      descripcion: ""
+      descripcion: "",
     };
   },
 
@@ -234,7 +228,7 @@ export default {
       editProductAPI();
     },
 
-    idToDelete(id){
+    idToDelete(id) {
       this.delDialog = true;
       const idSeleccionado = this.getProducts.find((item) => item.id == id);
 
@@ -270,23 +264,8 @@ export default {
 };
 </script>
 
-  <style scoped>
-tbody {
-  text-align: center;
-}
-.registrados-title,
-.registrados-title span {
-  letter-spacing: 0.001rem;
-  font-family: Roboto;
-  text-transform: uppercase;
-  color: #6d4c41;
-  font-weight: 600;
-}
-.registrados-title span {
-  font-weight: 200;
-}
-.v-application--is-ltr .v-divider--inset:not(.v-divider--vertical) {
-  width: 50%;
-  margin: 1rem auto;
-}
+<style scoped>
+  tbody {
+    text-align: center;
+  }
 </style>

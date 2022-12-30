@@ -58,7 +58,5 @@ export default new Vuex.Store({
       commit('getProductsMutation', response);
     },
 
-  },
-  modules: {
   }
 })
