@@ -3,6 +3,14 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
+import Toasted from 'vue-toasted';
+
+Vue.use(Toasted, {
+  duration: 1500,
+  position: 'top-center',
+  theme: 'outline',
+  iconPack: 'material'
+})
 
 Vue.config.productionTip = false
 

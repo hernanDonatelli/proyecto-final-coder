@@ -57,16 +57,23 @@
             </td>
 
             <td>
-              <v-btn
-                @click="deleteItem(producto.id)"
-                :id="`btn-delete-${producto.id}`"
-                class="ma-2"
-                text
-                icon
-                color="red accent-3"
-              >
-                <v-icon>mdi-delete</v-icon>
-              </v-btn>
+              <v-tooltip left color="error">
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    @click="deleteItem(producto.id)"
+                    :id="`btn-delete-${producto.id}`"
+                    class="ma-2"
+                    text
+                    icon
+                    color="red accent-3"
+                    v-bind="attrs"
+                    v-on="on"
+                  >
+                    <v-icon>mdi-delete</v-icon>
+                  </v-btn>
+                </template>
+                <span>Vas a quitar este producto del carrito?</span>
+              </v-tooltip>
             </td>
           </tr>
         </tbody>
@@ -74,7 +81,12 @@
     </v-simple-table>
 
     <v-row v-if="subTotalCart() != 0" class="mt-3 pr-10">
-      <v-col class="d-flex flex-column justify-end pa-2">
+      <v-col class="d-flex align-center" cols="4">
+        <v-icon id="store">mdi-arrow-left-bold-circle-outline</v-icon>
+        <router-link class="ml-3" id="buyNext" to="/shop">Seguir Comprando?</router-link>
+      </v-col>
+
+      <v-col cols="8" class="d-flex flex-column justify-end pa-2">
         <p class="text-right my-2">
           SubTotal: <strong>${{ subTotalCart() }}</strong>
         </p>
@@ -119,6 +131,14 @@ export default {
       let index = this.getItemsCart.indexOf(itemToDelete);
 
       this.getItemsCart.splice(index, 1);
+
+      this.$toasted.show(
+        'Producto Eliminado!!', {
+          theme: "bubble",
+          position: "top-center",
+          duration: 1500,
+          type: 'error'
+        })
     },
   },
   computed: {
@@ -135,4 +155,16 @@ export default {
   width: 30px;
   text-align: center;
 }
+#buyNext{
+  text-decoration: none;
+  color: #6D4C41;
+  transition: all .2s ease-in-out;
+}
+#buyNext:hover{
+  color: #FFAB00;
+}
+#store{
+  color: #6D4C41;
+}
+
 </style>

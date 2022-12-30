@@ -76,6 +76,13 @@ export default {
       console.log(selectProduct);
       if(this.getUserActive){
         this.addCartMutation(selectProduct);
+
+        this.$toasted.show('Producto Agregado!!', {
+          theme: "bubble",
+          position: "top-center",
+          duration : 2000,
+          type: 'success',
+        })
       }else{
         this.$router.push('/acceso-denegado');
       }
