@@ -84,6 +84,12 @@
         </p>
       </v-col>
     </v-row>
+
+    <v-row v-else>
+      <v-col cols="12">
+        <p class="my-4 text-center">No tienes productos en el carrito.</p>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
