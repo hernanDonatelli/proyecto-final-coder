@@ -1,5 +1,5 @@
 <template>
-  <div id="shop">
+  <div id="shop" class="shopView">
     <shop-component />
   </div>
 </template>
@@ -18,5 +18,8 @@ export default {
 <style scoped>
 #shop{
   background-color: #fafafa;
+}
+.shopView{
+  margin-top: 56px;
 }
 </style>

@@ -1,6 +1,55 @@
 <template>
   <div>
-    <v-simple-table class="text-center">
+    <v-row v-if="getItemsCart != 0" class="d-flex justify-end">
+      <v-col cols="2">
+        <v-btn
+          @click="dialogEmpty = true"
+          class="mb-0 mr-5 white--text"
+          block
+          color="red darken-2"
+        >
+          Vaciar Carrito
+        </v-btn>
+
+        <!-- Modal vaciar carrito -->
+        <v-row justify="center">
+          <v-dialog
+            v-model="dialogEmpty"
+            overlay-color="brown darken-4"
+            max-width="600"
+            width="unset"
+          >
+            <v-card>
+              <v-card-title class="text-h5 buy-title">
+                <span>Vaciar</span>Carrito?
+              </v-card-title>
+
+              <v-divider class="mb-5" inset></v-divider>
+
+              <v-card-text>
+                <p>
+                  Clickeando en Aceptar el Carrito quedará vacío. Puedes ir al
+                  listado de productos para comenzar nuevamente.
+                </p>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+
+                <v-btn color="red accent-2" text @click="dialogEmpty = false">
+                  Cancelar
+                </v-btn>
+
+                <v-btn color="teal accent-4" text @click="emptyCartStore()">
+                  Aceptar
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-row>
+      </v-col>
+    </v-row>
+    <v-simple-table class="text-center mt-7">
       <template v-slot:default>
         <thead>
           <tr>
@@ -81,25 +130,23 @@
     </v-simple-table>
 
     <v-row v-if="subTotalCart() != 0" class="mt-3 pr-10">
-      <v-col class="d-flex align-center" cols="4">
+      <v-col class="d-flex justify-start align-center" cols="4">
         <v-icon id="store">mdi-arrow-left-bold-circle-outline</v-icon>
-        <router-link class="ml-3" id="buyNext" to="/shop">Seguir Comprando?</router-link>
+        <router-link class="ml-3" id="buyNext" to="/shop"
+          >Seguir Comprando?</router-link
+        >
       </v-col>
 
       <v-col cols="4" class="pt-7">
-        <v-btn
-          @click="finalBuy()"
-          class="mb-0"
-          block
-          color="teal accent-3"
-        >
+        <v-btn @click="dialog = true" class="mb-0" block color="teal accent-3">
           Procesar Compra
         </v-btn>
 
+        <!-- Modal finalizar compra -->
         <v-row justify="center">
-
           <v-dialog
             v-model="dialog"
+            overlay-color="brown darken-4"
             max-width="600"
             width="unset"
           >
@@ -111,33 +158,30 @@
               <v-divider class="mb-5" inset></v-divider>
 
               <v-card-text>
-                <p>Aceptado este paso finalizará el proceso de compra y le enviaremos un mail con la información para abonar el pedido.</p>
-                <p>El total de su compra es de <strong>${{ (subTotalCart() * 1.21).toFixed(2) }}</strong></p>
+                <p>
+                  Aceptado este paso finalizará el proceso de compra y le
+                  enviaremos un mail con la información para abonar el pedido.
+                </p>
+                <p>
+                  El total de su compra es de
+                  <strong>${{ (subTotalCart() * 1.21).toFixed(2) }}</strong>
+                </p>
               </v-card-text>
 
               <v-card-actions>
                 <v-spacer></v-spacer>
 
-                <v-btn
-                  color="red accent-2"
-                  text
-                  @click="dialog = false"
-                >
+                <v-btn color="red accent-2" text @click="dialog = false">
                   Cancelar
                 </v-btn>
 
-                <v-btn
-                  color="teal accent-4"
-                  text
-                  @click="dialog = false"
-                >
+                <v-btn color="teal accent-4" text @click="dialog = postBuy()">
                   Aceptar
                 </v-btn>
               </v-card-actions>
             </v-card>
           </v-dialog>
         </v-row>
-
       </v-col>
 
       <v-col cols="4" class="d-flex flex-column justify-end pa-2">
@@ -146,7 +190,8 @@
         </p>
 
         <p class="text-right my-2">
-          Total (+21% IVA): <strong>${{ (subTotalCart() * 1.21).toFixed(2) }}</strong>
+          Total (+21% IVA):
+          <strong>${{ (subTotalCart() * 1.21).toFixed(2) }}</strong>
         </p>
       </v-col>
     </v-row>
@@ -160,16 +205,19 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "CartComponent",
   data() {
     return {
-      dialog: false
-    }
+      dialog: false,
+      dialogEmpty: false,
+    };
   },
   methods: {
+    ...mapMutations(["emptyCartStore"]),
+
     subTotalCart() {
       const itemsInCart = this.getItemsCart.map((item) => item);
 
@@ -185,27 +233,65 @@ export default {
 
     deleteItem(id) {
       const itemToDelete = this.getItemsCart.find((item) => {
-       return item.id == id;
+        return item.id == id;
       });
       let index = this.getItemsCart.indexOf(itemToDelete);
 
       this.getItemsCart.splice(index, 1);
 
-      this.$toasted.show(
-        'Producto Eliminado!!', {
+      this.$toasted.show("Producto Eliminado!!", {
+        theme: "bubble",
+        position: "top-center",
+        duration: 1500,
+        type: "error",
+      });
+    },
+
+    emptyCart() {
+      this.getItemsCart = [];
+    },
+
+    postBuy() {
+      const individualBuy = {
+        idCliente: this.getUserActive.id,
+        nombreCliente: this.getUserActive.nombre,
+        apellidoCliente: this.getUserActive.apellido,
+        totalCompra: (this.subTotalCart() * 1.21).toFixed(2),
+        compra: this.getItemsCart,
+        pagado: false,
+        enviado: false,
+      };
+
+      const upBuyAPI = async () => {
+        const options = {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(individualBuy),
+        };
+
+        const postBuy = await fetch(
+          "https://639c6ec816d1763ab149a523.mockapi.io/carts",
+          options
+        );
+        const response = await postBuy.json();
+        console.log(response);
+
+        this.emptyCartStore();
+
+        this.$toasted.show("La Compra ha sido exitosa!!", {
           theme: "bubble",
           position: "top-center",
-          duration: 1500,
-          type: 'error'
-        })
+          duration: 3000,
+          type: "success",
+        });
+      };
+      upBuyAPI();
     },
-    finalBuy(){
-      this.dialog = true;
-      console.log('compra procesada')
-    }
   },
   computed: {
-    ...mapGetters(["getItemsCart"]),
+    ...mapGetters(["getItemsCart", "getUserActive"]),
   },
 };
 </script>
@@ -218,18 +304,18 @@ export default {
   width: 30px;
   text-align: center;
 }
-#buyNext{
+#buyNext {
   text-decoration: none;
-  color: #6D4C41;
-  transition: all .2s ease-in-out;
+  color: #6d4c41;
+  transition: all 0.2s ease-in-out;
 }
-#buyNext:hover{
-  color: #FFAB00;
+#buyNext:hover {
+  color: #ffab00;
 }
-#store{
-  color: #6D4C41;
+#store {
+  color: #6d4c41;
 }
-.v-application--is-ltr .v-divider--inset:not(.v-divider--vertical){
+.v-application--is-ltr .v-divider--inset:not(.v-divider--vertical) {
   width: 50%;
   margin-left: 3%;
 }

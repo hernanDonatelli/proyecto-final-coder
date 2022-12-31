@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar color="brown darken-1" dark>
+    <v-app-bar absolute shaped color="brown darken-1" dark>
       <v-app-bar-nav-icon v-if="getUserActive()" @click="drawer = true"></v-app-bar-nav-icon>
 
       <v-toolbar-title class="text-uppercase amber--text"
@@ -9,7 +9,8 @@
       >
       <v-spacer></v-spacer>
 
-      <div v-if="!$store.getters.getUserActive">
+      <div v-if="!getUserActive()">
+
         <v-btn to="/login" small color="success" class="mr-3"
           ><span class="white--text">Ingresar</span></v-btn
         >

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="registerView">
     <v-row>
       <v-col xs="12" sm="10" lg="6" class="mx-auto mt-10">
         <h1 class="text-h4 text-uppercase text-center title mb-3">Registro</h1>
@@ -47,6 +47,9 @@ export default {
 </script>
 
 <style scoped>
+.registerView{
+  margin-top: 56px;
+}
 .title {
   letter-spacing: 0.001rem;
   font-family: Roboto;

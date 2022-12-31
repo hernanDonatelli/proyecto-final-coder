@@ -1,6 +1,19 @@
 <template>
-    <div v-if="$store.getters.getUserActive" class="d-flex align-center">
-        <p class="mb-0">Bienvenido, <span>{{ $store.getters.getUserActive.nombre }}</span></p>
+    <div v-if="getUserActive()" class="d-flex align-center">
+        <v-btn
+        to="/myCart"
+        class="mx-5"
+        fab
+        small
+        color="amber accent-4"
+        >
+            <v-icon color="brown darken-1" dark>
+                mdi-cart-variant
+            </v-icon>
+            <span>{{ getItemsCart().length }}</span>
+        </v-btn>
+
+        <p class="mb-0">Bienvenido, <span>{{ getUserActive().nombre }}</span></p>
         <v-btn
         @click="logOut"
         small
@@ -12,12 +25,13 @@
 </template>
 
 <script>
-import {mapMutations} from 'vuex';
+import {mapGetters, mapMutations} from 'vuex';
 
     export default {
         name: 'UserComponent',
         methods: {
             ...mapMutations(['logOutUser']),
+            ...mapGetters(['getUserActive', 'getItemsCart']),
 
             logOut(){
                 this.logOutUser();
@@ -40,5 +54,13 @@ span{
     font-family: Rubik;
     font-size: .8rem;
     color: white;
+}
+.v-btn--fab.v-size--small{
+    width: 45px;
+    height: 45px;
+}
+.v-btn--fab.v-size--small span{
+    color: #6D4C41;
+    font-size: 1.2rem;
 }
 </style>
