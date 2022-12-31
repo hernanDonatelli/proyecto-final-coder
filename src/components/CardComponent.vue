@@ -73,16 +73,28 @@ export default {
 
     addToCart(idProduct){
       const selectProduct = this.getProducts.find((item) => item.id == idProduct);
-      console.log(selectProduct);
+      
       if(this.getUserActive){
-        this.addCartMutation(selectProduct);
+        const itemInCartStore = this.getItemsCart.find(item => item.id == selectProduct.id);
 
-        this.$toasted.show('Producto Agregado!!', {
+        if(itemInCartStore){
+          this.$toasted.show('El Producto ya existe en el Carrito', {
           theme: "bubble",
           position: "top-center",
           duration : 2000,
-          type: 'success',
+          type: 'error',
         })
+        }else{
+          this.addCartMutation(selectProduct);
+
+          this.$toasted.show('Producto Agregado!!', {
+            theme: "bubble",
+            position: "top-center",
+            duration : 2000,
+            type: 'success',
+          })
+        }
+
       }else{
         this.$router.push('/acceso-denegado');
       }

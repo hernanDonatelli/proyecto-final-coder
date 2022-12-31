@@ -86,7 +86,61 @@
         <router-link class="ml-3" id="buyNext" to="/shop">Seguir Comprando?</router-link>
       </v-col>
 
-      <v-col cols="8" class="d-flex flex-column justify-end pa-2">
+      <v-col cols="4" class="pt-7">
+        <v-btn
+          @click="finalBuy()"
+          class="mb-0"
+          block
+          color="teal accent-3"
+        >
+          Procesar Compra
+        </v-btn>
+
+        <v-row justify="center">
+
+          <v-dialog
+            v-model="dialog"
+            max-width="600"
+            width="unset"
+          >
+            <v-card>
+              <v-card-title class="text-h5 buy-title">
+                <span>Finalizar</span>Compra?
+              </v-card-title>
+
+              <v-divider class="mb-5" inset></v-divider>
+
+              <v-card-text>
+                <p>Aceptado este paso finalizará el proceso de compra y le enviaremos un mail con la información para abonar el pedido.</p>
+                <p>El total de su compra es de <strong>${{ (subTotalCart() * 1.21).toFixed(2) }}</strong></p>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+
+                <v-btn
+                  color="red accent-2"
+                  text
+                  @click="dialog = false"
+                >
+                  Cancelar
+                </v-btn>
+
+                <v-btn
+                  color="teal accent-4"
+                  text
+                  @click="dialog = false"
+                >
+                  Aceptar
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-row>
+
+      </v-col>
+
+      <v-col cols="4" class="d-flex flex-column justify-end pa-2">
         <p class="text-right my-2">
           SubTotal: <strong>${{ subTotalCart() }}</strong>
         </p>
@@ -110,6 +164,11 @@ import { mapGetters } from "vuex";
 
 export default {
   name: "CartComponent",
+  data() {
+    return {
+      dialog: false
+    }
+  },
   methods: {
     subTotalCart() {
       const itemsInCart = this.getItemsCart.map((item) => item);
@@ -140,6 +199,10 @@ export default {
           type: 'error'
         })
     },
+    finalBuy(){
+      this.dialog = true;
+      console.log('compra procesada')
+    }
   },
   computed: {
     ...mapGetters(["getItemsCart"]),
@@ -166,5 +229,19 @@ export default {
 #store{
   color: #6D4C41;
 }
-
+.v-application--is-ltr .v-divider--inset:not(.v-divider--vertical){
+  width: 50%;
+  margin-left: 3%;
+}
+.buy-title,
+.buy-title span {
+  letter-spacing: 0.001rem;
+  font-family: Roboto;
+  text-transform: uppercase;
+  color: #6d4c41;
+  font-weight: 600;
+}
+.buy-title span {
+  font-weight: 200;
+}
 </style>
