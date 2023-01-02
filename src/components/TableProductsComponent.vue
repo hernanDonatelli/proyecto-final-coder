@@ -112,11 +112,11 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog = false">
-              Close
+            <v-btn color="red darken-1" text @click="dialog = false">
+              Cancelar
             </v-btn>
-            <v-btn color="blue darken-1" text @click="putEditProduct">
-              Save
+            <v-btn color="teal darken-3" text @click="putEditProduct">
+              Guardar
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -203,6 +203,7 @@ export default {
         stock: this.stock,
         categoria: this.categoria,
         img: this.img,
+        descripcion: this.descripcion
       };
 
       //Enviar producto editado a la API
