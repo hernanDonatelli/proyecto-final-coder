@@ -81,16 +81,7 @@
               <v-icon>mdi-store</v-icon>
             </v-list-item-icon>
             <v-list-item-title>
-              <router-link to="/admin-productos">Listado Productos</router-link>
-            </v-list-item-title>
-          </v-list-item>
-
-          <v-list-item v-if="this.getAdmin()">
-            <v-list-item-icon>
-              <v-icon>mdi-database-plus</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>
-              <router-link to="/admin-create-productos">Crear Productos</router-link>
+              <router-link to="/admin-productos">Productos</router-link>
             </v-list-item-title>
           </v-list-item>
 
@@ -99,7 +90,7 @@
               <v-icon>mdi-account-group</v-icon>
             </v-list-item-icon>
             <v-list-item-title>
-              <router-link to="/admin-usuarios">Listado Usuarios</router-link>
+              <router-link to="/admin-usuarios">Usuarios</router-link>
             </v-list-item-title>
           </v-list-item>
 
@@ -108,7 +99,7 @@
               <v-icon>mdi-truck-delivery</v-icon>
             </v-list-item-icon>
             <v-list-item-title>
-              <router-link to="/admin-productos">Admin Pedidos</router-link>
+              <router-link to="/admin-pedidos">Pedidos</router-link>
             </v-list-item-title>
           </v-list-item>
         </v-list-item-group>

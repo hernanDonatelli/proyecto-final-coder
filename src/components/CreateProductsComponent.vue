@@ -1,101 +1,139 @@
 <template>
   <div>
-    <v-container>
-      <v-row>
-        <v-col xs="12" sm="10" lg="6" class="mx-auto mt-10">
-          <v-form id="createProductForm" lazy-validation>
-            <h1 class="text-h4 text-uppercase text-center create-title mb-3">
-              Crear Producto
-            </h1>
+    <!-- Dialog para editar productos -->
+    <v-row justify="center">
+      <v-dialog v-model="dialog" persistent max-width="700px">
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            class="create-button"
+            color="brown darken-1"
+            dark
+            v-bind="attrs"
+            v-on="on"
+          >
+            Crear Producto
+          </v-btn>
+        </template>
+        <v-card id="formCreate">
+          <v-card-title>
+            <span class="text-h5 title-create"><span>Crear</span>Producto</span>
+          </v-card-title>
 
-            <v-divider class="mb-10 brown darken-1" />
+          <v-divider color="brown darken-1" />
 
-            <v-row>
-              <v-col xs="12" sm="3" lg="4">
-                <v-text-field
-                  v-model="createNombre"
-                  label="Nombre"
-                ></v-text-field>
-              </v-col>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col class="py-0" xs="12" sm="3" lg="4">
+                  <v-text-field
+                    v-model="createNombre"
+                    label="Nombre"
+                  ></v-text-field>
+                </v-col>
 
-              <v-col xs="12" sm="3" lg="4">
-                <v-text-field
-                  v-model="createMarca"
-                  label="Marca"
-                ></v-text-field>
-              </v-col>
-              <v-col xs="12" sm="3" lg="4">
-                <v-text-field
-                  v-model="createCategoria"
-                  label="Categoria"
-                ></v-text-field>
-              </v-col>
-            </v-row>
+                <v-col class="py-0" xs="12" sm="3" lg="4">
+                  <v-text-field
+                    v-model="createMarca"
+                    label="Marca"
+                  ></v-text-field>
+                </v-col>
 
-            <v-row>
-              <v-col cols="12">
-                <v-text-field
-                  v-model="createImg"
-                  hint="Ej: https://dominio.com/imagen.jpg"
-                  label="URL Imagen"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-
-            <v-row>
-              <v-col cols="12">
-                <v-textarea
-                  v-model="createDescripcion"
-                  name="input-7-1"
-                  label="Descripcion del producto"
-                  hint="Letras, numeros, signos, etc..."
-                ></v-textarea>
-              </v-col>
-            </v-row>
-
-            <v-row>
-              <v-col xs="6">
-                <v-text-field
-                  v-model="createStock"
-                  label="Stock"
-                ></v-text-field>
-              </v-col>
-              <v-col xs="6">
-                <v-text-field
-                  v-model="createPrecio"
-                  label="Precio"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-
-            <v-btn color="success" class="mr-4" @click="postCreateProduct">
-              Enviar
-            </v-btn>
-          </v-form>
-        </v-col>
-      </v-row>
-
-      <v-row>
-        <v-col xs="12" sm="10" lg="6" class="mx-auto">
-          <div id="createSuccess" class="hidden">
-            <v-alert
-              prominent
-              text
-              type="success"
-              icon="mdi-checkbox-marked-circle"
-            >
-              <v-row class="align-center">
-                <v-col lg="12">
-                  El Producto ha sido creado exitosamente!
+                <v-col class="py-0" xs="12" sm="3" lg="4">
+                  <v-text-field
+                    v-model="createCategoria"
+                    label="Categoria"
+                  ></v-text-field>
                 </v-col>
               </v-row>
-            </v-alert>
-          </div>
-        </v-col>
-      </v-row>
-    </v-container>
+
+              <v-row>
+                <v-col class="py-0" cols="12">
+                  <v-text-field
+                    v-model="createImg"
+                    hint="Ej: https://dominio.com/imagen.jpg"
+                    label="URL Imagen"
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+
+              <v-row>
+                <v-col class="py-0" cols="12">
+                  <v-textarea
+                    v-model="createDescripcion"
+                    name="input-7-1"
+                    label="Descripcion del producto"
+                    hint="Letras, numeros, signos, etc..."
+                    row-height="5"
+                    counter
+                  ></v-textarea>
+                </v-col>
+              </v-row>
+
+              <v-row>
+                <v-col class="py-0" xs="6">
+                  <v-text-field
+                    v-model="createStock"
+                    label="Stock"
+                  ></v-text-field>
+                </v-col>
+                <v-col class="py-0" xs="6">
+                  <v-text-field
+                    v-model="createPrecio"
+                    label="Precio"
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+
+              <v-row>
+                <v-col class="py-0" cols="6">
+                  <v-btn
+                    block
+                    color="red darken-3 white--text"
+                    class="mr-4"
+                    @click="dialog = false"
+                  >
+                    Cancelar
+                  </v-btn>
+                </v-col>
+                <v-col class="py-0" cols="6">
+                  <v-btn
+                    block
+                    color="success"
+                    class="mr-4"
+                    @click="postCreateProduct"
+                  >
+                    Enviar
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-card-text>
+        </v-card>
+
+      </v-dialog>
+    </v-row>
+
+    <v-row>
+          <v-col xs="12" sm="10" lg="6" class="mx-auto">
+            <div id="createSuccess" class="hidden">
+              <v-alert
+                prominent
+                text
+                type="success"
+                icon="mdi-checkbox-marked-circle"
+              >
+                <v-row class="align-center">
+                  <v-col lg="12">
+                    El Producto ha sido creado exitosamente!
+                  </v-col>
+                </v-row>
+              </v-alert>
+            </div>
+          </v-col>
+        </v-row>
   </div>
 </template>
+
 
 <script>
 export default {
@@ -108,7 +146,8 @@ export default {
       createPrecio: null,
       createStock: null,
       createCategoria: "",
-      createDescripcion: ""
+      createDescripcion: "",
+      dialog: false,
     };
   },
   methods: {
@@ -120,7 +159,7 @@ export default {
         precio: this.createPrecio,
         stock: this.createStock,
         categoria: this.createCategoria,
-        descripcion: this.createDescripcion
+        descripcion: this.createDescripcion,
       };
 
       const createProductAPI = async () => {
@@ -140,17 +179,19 @@ export default {
         console.log(response);
 
         setTimeout(() => {
-          const form = document.getElementById("createProductForm");
+          const form = document.getElementById("formCreate");
 
           if (form) {
-            form.remove();
+            this.dialog = false;
             document.getElementById("createSuccess").classList.remove("hidden");
             document.getElementById("createSuccess").classList.add("visible");
           }
 
           setTimeout(() => {
+            document.getElementById("createSuccess").classList.remove("visible");
+            document.getElementById("createSuccess").classList.add("hidden");
             this.$router.push("/admin-productos");
-          }, 1500);
+          }, 2000);
         }, 1500);
       };
       createProductAPI();
@@ -160,17 +201,6 @@ export default {
 </script>
 
 <style scoped>
-.create-title,
-.create-title span {
-  letter-spacing: 0.001rem;
-  font-family: Roboto;
-  text-transform: uppercase;
-  color: #6d4c41;
-  font-weight: 600;
-}
-.create-title span {
-  font-weight: 200;
-}
 #createSuccess.visible {
   visibility: visible;
   opacity: 1;
@@ -180,5 +210,29 @@ export default {
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s 1s, opacity 1s linear;
+}
+.title-create,
+.title-create span {
+  letter-spacing: 0.001rem;
+  font-family: Roboto;
+  text-transform: uppercase;
+  color: #6d4c41;
+  font-weight: 600;
+}
+.title-create span {
+  font-weight: 200;
+}
+hr.theme--light.v-divider {
+  display: block;
+  height: 2px;
+  width: 15%;
+  border-color: unset;
+  border: 2px solid #6d4c41;
+  margin-left: 5%;
+}
+.create-button {
+  position: absolute;
+  top: 6%;
+  right: 3%;
 }
 </style>

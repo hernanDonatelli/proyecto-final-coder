@@ -67,4 +67,10 @@ export default {
   opacity: 0;
   transition: visibility 0s 1s, opacity 1s linear;
 }
+hr{
+  display: block;
+    width: 15%;
+    margin: 0 auto;
+    border: 1.5px solid black;
+}
 </style>

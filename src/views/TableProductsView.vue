@@ -1,28 +1,46 @@
 <template>
-  <v-container>
+  <v-container class="products-view">
     <h1 class="text-h4 text-uppercase text-center registrados-title my-3">
-      <span>Nuestros</span>Productos
+      <span>Listado</span>Productos
     </h1>
 
-    <v-divider inset class="mb-10 mt-5 brown darken-1" />
+    <v-divider class="brown darken-1" />
 
-    <table-products-component />
+    <create-products-component />
+
+    <table-products-component class="table-view" />
+
 
   </v-container>
 </template>
 
 <script>
 import TableProductsComponent from "@/components/TableProductsComponent.vue";
+import CreateProductsComponent from "@/components/CreateProductsComponent.vue";
 
 export default {
   name: "TableUsersView",
   components: {
     TableProductsComponent,
-  },
+    CreateProductsComponent
+  }
 };
 </script>
 
 <style scoped>
+.products-view{
+  padding-top: 5rem;
+  position: relative;
+}
+.table-view{
+  margin-top: -5rem;
+}
+hr{
+  display: block;
+  width: 15%;
+  margin: 0 auto 1rem;
+  border: 1.5px solid black;
+}
 .registrados-title,
 .registrados-title span {
   letter-spacing: 0.001rem;
@@ -34,8 +52,7 @@ export default {
 .registrados-title span {
   font-weight: 200;
 }
-.v-application--is-ltr .v-divider--inset:not(.v-divider--vertical) {
-  width: 50%;
-  margin: 1rem auto;
-}
+
+
+
 </style>

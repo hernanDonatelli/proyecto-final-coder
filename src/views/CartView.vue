@@ -1,13 +1,12 @@
 <template>
   <v-container class="cartView">
-    <h1 class="text-h4 text-uppercase text-center cart-title my-3">
+    <h1 class="text-h4 text-uppercase text-center cart-title my-5">
       <span>Mi</span>Carrito
     </h1>
 
-    <v-divider class="mb-5 mt-5 brown darken-1" />
+    <v-divider class="brown darken-1" />
 
     <cart-component />
-
   </v-container>
 </template>
 
@@ -23,7 +22,7 @@ export default {
 </script>
 
 <style scoped>
-.cartView{
+.cartView {
   margin-top: 56px;
 }
 .cart-title,
@@ -37,5 +36,10 @@ export default {
 .cart-title span {
   font-weight: 200;
 }
-
+hr {
+  display: block;
+  width: 10%;
+  margin: 1rem auto 0.5rem;
+  border: 1.5px solid black;
+}
 </style>

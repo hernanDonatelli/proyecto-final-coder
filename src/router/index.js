@@ -53,7 +53,13 @@ const routes = [
     name: 'admin-create-productos',
     component: () => import('../views/CreateProductsView.vue'),
     meta: {requiresAuth: true}
-  }
+  },
+  {
+    path: '/admin-pedidos',
+    name: 'admin-pedidos',
+    component: () => import('../views/PedidosView.vue'),
+    meta: {requiresAuth: true}
+  },
 ]
 
 const router = new VueRouter({

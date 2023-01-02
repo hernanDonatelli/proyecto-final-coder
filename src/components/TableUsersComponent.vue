@@ -1,11 +1,4 @@
 <template>
-  <v-container>
-    <h1 class="text-h4 text-uppercase text-center registrados-title my-3">
-      <span>Usuarios</span>Registrados
-    </h1>
-
-    <v-divider inset class="mb-10 mt-5 brown darken-1" />
-
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -34,7 +27,7 @@
         </tbody>
       </template>
     </v-simple-table>
-  </v-container>
+
 </template>
 
   <script>
@@ -62,22 +55,9 @@ export default {
 </script>
 
   <style scoped>
+ 
 tbody {
   text-align: center;
 }
-.registrados-title,
-.registrados-title span {
-  letter-spacing: 0.001rem;
-  font-family: Roboto;
-  text-transform: uppercase;
-  color: #6d4c41;
-  font-weight: 600;
-}
-.registrados-title span {
-  font-weight: 200;
-}
-.v-application--is-ltr .v-divider--inset:not(.v-divider--vertical) {
-  width: 50%;
-  margin: 1rem auto;
-}
+
 </style>

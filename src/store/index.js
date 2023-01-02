@@ -8,7 +8,8 @@ export default new Vuex.Store({
     userActive: null,
     usersRegistered: [],
     productos: [],
-    myCart: []
+    myCart: [],
+    pedidos: []
   },
   getters: {
     getUserActive(state){
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     },
     getItemsCart(state){
       return state.myCart;
+    },
+    getPedidosStore(state) {
+      return state.pedidos;
     }
   },
   mutations: {
@@ -45,7 +49,11 @@ export default new Vuex.Store({
     },
     emptyCartStore(state){
       state.myCart = [];
+    },
+    addPedidosMutation(state, newPedido){
+      state.pedidos = newPedido;
     }
+
   },
   actions: {
     getUsersAPI: async ({commit}) =>{
@@ -59,6 +67,12 @@ export default new Vuex.Store({
       const response = await productsAPI.json();
 
       commit('getProductsMutation', response);
+    },
+    getPedidosAPI: async ({commit}) => {
+      const pedidosAPI = await fetch('https://639c6ec816d1763ab149a523.mockapi.io/carts');
+      const allPedidos = await pedidosAPI.json();
+
+      commit('addPedidosMutation', allPedidos);
     },
 
   }

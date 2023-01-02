@@ -2,9 +2,9 @@
   <v-container class="loginView">
     <v-row>
       <v-col xs="12" sm="10" md="8" lg="5" class="mx-auto mt-10">
-        <h1 class="text-h4 text-uppercase text-center title mb-3">Login</h1>
+        <h1 class="text-h4 text-uppercase text-center title mb-3">Ingresar</h1>
 
-        <v-divider class="mb-10 brown darken-1" />
+        <v-divider class="mb-10 brown darken-1 divider" />
 
         <login-component />
       </v-col>
@@ -34,4 +34,11 @@ export default {
   color: #6d4c41;
   font-weight: 600;
 }
+hr{
+  display: block;
+    width: 15%;
+    margin: 0 auto;
+    border: 1.5px solid black;
+}
+
 </style>
