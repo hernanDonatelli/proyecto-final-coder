@@ -1,6 +1,34 @@
 <template>
-  <v-card class="mx-auto my-5" max-width="300" shaped>
-    <v-img height="170" :src="producto.img"></v-img>
+  <v-card class="card-product mx-auto my-5" max-width="300" shaped>
+    <router-link class="link-product" :to="`/producto/${producto.id}`">
+      <v-img height="180" :src="producto.img">
+        <v-dialog v-model="dialog" width="500">
+          <template v-slot:activator="{ on, attrs }">
+            <v-btn class="mx-2 mt-1" color="amber darken-1" fab dark small text v-bind="attrs" v-on="on">
+              <v-icon>mdi-plus-circle</v-icon>
+            </v-btn>
+          </template>
+
+          <v-card>
+            <div class="d-flex justify-space-between align-center">
+              <v-img height="170" :src="producto.img"></v-img>
+              <v-card-title>{{ producto.nombre }}</v-card-title>
+              <v-icon class="heart">mdi-heart</v-icon>
+            </div>
+
+            <p class="price">${{ producto.precio }}</p>
+
+            <v-card-text>
+              <v-row align="center" class="mx-0">
+                <div class="my-2 text-subtitle-1">
+                  {{ producto.marca }} • {{ producto.categoria }}
+                </div>
+              </v-row>
+            </v-card-text>
+          </v-card>
+        </v-dialog>
+      </v-img>
+    </router-link>
 
     <div class="d-flex justify-space-between align-center">
       <v-card-title>{{ producto.nombre }}</v-card-title>
@@ -46,7 +74,7 @@
           {{ producto.descripcion }}
         </v-card-text>
 
-        <p class="stock text-caption pl-4">
+        <p class="stock text-caption pl-4 mb-0">
           Stock:
           <span>{{ producto.stock == 0 ? "Sin stock" : producto.stock }}</span>
         </p>
@@ -56,54 +84,57 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex';
+import { mapMutations, mapGetters } from "vuex";
 
 export default {
   name: "cardComponent",
   data() {
     return {
       show: false,
+      dialog: false,
     };
   },
   props: {
     producto: Object,
   },
   methods: {
-    ...mapMutations(['addCartMutation']),
+    ...mapMutations(["addCartMutation"]),
 
-    addToCart(idProduct){
-      const selectProduct = this.getProducts.find((item) => item.id == idProduct);
-      
-      if(this.getUserActive){
-        const itemInCartStore = this.getItemsCart.find(item => item.id == selectProduct.id);
+    addToCart(idProduct) {
+      const selectProduct = this.getProducts.find(
+        (item) => item.id == idProduct
+      );
 
-        if(itemInCartStore){
-          this.$toasted.show('El Producto ya existe en el Carrito', {
-          theme: "bubble",
-          position: "top-center",
-          duration : 2000,
-          type: 'error',
-        })
-        }else{
-          this.addCartMutation(selectProduct);
+      if (this.getUserActive) {
+        const itemInCartStore = this.getItemsCart.find(
+          (item) => item.id == selectProduct.id
+        );
 
-          this.$toasted.show('Producto Agregado!!', {
+        if (itemInCartStore) {
+          this.$toasted.show("El Producto ya existe en el Carrito", {
             theme: "bubble",
             position: "top-center",
-            duration : 2000,
-            type: 'success',
-          })
+            duration: 2000,
+            type: "error",
+          });
+        } else {
+          this.addCartMutation(selectProduct);
+
+          this.$toasted.show("Producto Agregado!!", {
+            theme: "bubble",
+            position: "top-center",
+            duration: 2000,
+            type: "success",
+          });
         }
-
-      }else{
-        this.$router.push('/acceso-denegado');
+      } else {
+        this.$router.push("/acceso-denegado");
       }
-
-    }
+    },
   },
   computed: {
-    ...mapGetters(['getProducts', 'getUserActive', 'getItemsCart'])
-  }
+    ...mapGetters(["getProducts", "getUserActive", "getItemsCart"]),
+  },
 };
 </script>
 
@@ -112,6 +143,19 @@ export default {
 
 .descripcion {
   font-family: Rubik;
+}
+.card-product{
+  position: relative;
+}
+.link-product{
+  text-decoration: none;
+}
+.link-product button{
+  position: relative;
+  right: -80%;
+}
+.v-btn--fab.v-size--small .v-icon{
+  font-size: 2rem;
 }
 .v-card__actions {
   justify-content: space-around;

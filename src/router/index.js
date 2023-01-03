@@ -37,6 +37,11 @@ const routes = [
     component: () => import('../views/AccesoRestringidoView.vue')
   },
   {
+    path: '/producto/:id',
+    name: 'producto',
+    component: () => import('../views/ShopView.vue')
+  },
+  {
     path: '/admin-usuarios',
     name: 'admin-usuarios',
     component: () => import('../views/TableUsersView.vue'),
