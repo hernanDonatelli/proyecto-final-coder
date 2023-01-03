@@ -17,12 +17,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(pedido, index) in getPedidos()" :key="index">
+          <tr v-for="(pedido, index) in getPedidosStore()" :key="index">
             <td>{{ pedido.id }}</td>
             <td>{{ pedido.nombreCliente }} {{ pedido.apellidoCliente }}</td>
             <td>
                 <ul>
-                    <li class="d-flex justify-evenly" v-for="(producto, index) in pedido.compra" :key="index">
+                    <li class="d-flex justify-evenly" v-for="(producto, index) in pedido.userCart" :key="index">
                         <span>* {{ producto.nombre }} (x{{ producto.cantidad }})</span>
                     </li>
                 </ul>
@@ -61,9 +61,6 @@ export default {
     ...mapActions(['getPedidosAPI']),
     ...mapGetters(["getPedidosStore"]),
 
-    getPedidos() {
-      return this.getPedidosStore();
-    }
 
   },
 };

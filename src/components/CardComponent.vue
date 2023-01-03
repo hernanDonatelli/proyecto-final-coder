@@ -98,7 +98,7 @@ export default {
     producto: Object,
   },
   methods: {
-    ...mapMutations(["addCartMutation"]),
+    ...mapMutations(["addCartMutation", 'addCartUserMutation']),
 
     addToCart(idProduct) {
       const selectProduct = this.getProducts.find(
@@ -106,7 +106,8 @@ export default {
       );
 
       if (this.getUserActive) {
-        const itemInCartStore = this.getItemsCart.find(
+
+        const itemInCartStore = this.getCartUserActive.find(
           (item) => item.id == selectProduct.id
         );
 
@@ -118,7 +119,20 @@ export default {
             type: "error",
           });
         } else {
-          this.addCartMutation(selectProduct);
+
+          this.addCartUserMutation(selectProduct);
+
+          //Traigo la info del localStorage
+          const actualCart = JSON.parse(localStorage.getItem('userLoged'));
+
+          //Capturar el cart del Store actualizado
+          const cartStore = this.getCartUserActive;
+          actualCart.userCart = cartStore;
+
+          //A medida que agrego un item se actualiza el localStorage
+          const cartJSON = JSON.stringify(actualCart);
+          localStorage.setItem('userLoged', cartJSON)
+
 
           this.$toasted.show("Producto Agregado!!", {
             theme: "bubble",
@@ -133,7 +147,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["getProducts", "getUserActive", "getItemsCart"]),
+    ...mapGetters(["getProducts", "getUserActive", "getItemsCart", "getCartUserActive"]),
   },
 };
 </script>

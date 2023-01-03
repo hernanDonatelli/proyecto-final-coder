@@ -1,34 +1,31 @@
 <template>
-  <div>
-      <v-row>
-        <v-col v-for="(producto, index) of getProducts" :key="index">
-          <card-component :producto="producto" />
-        </v-col>
-      </v-row>
-  </div>
+  <v-row>
+    <v-col v-for="(producto, index) of getProducts" :key="index">
+      <card-component :producto="producto" />
+    </v-col>
+  </v-row>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
-import CardComponent from './CardComponent.vue';
+import { mapActions, mapGetters } from "vuex";
+import CardComponent from "./CardComponent.vue";
 
 export default {
   name: "ShopComponent",
   components: {
-    CardComponent
+    CardComponent,
   },
   created() {
     this.getProductsAPI();
   },
   methods: {
-    ...mapActions(['getProductsAPI']),
+    ...mapActions(["getProductsAPI"]),
   },
   computed: {
-    ...mapGetters(['getProducts'])
-  }
+    ...mapGetters(["getProducts"]),
+  },
 };
 </script>
 
 <style scoped>
-
 </style>

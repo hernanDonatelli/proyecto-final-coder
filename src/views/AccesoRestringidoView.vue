@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="restringed-view">
     <v-row>
       <v-col xs="10" sm="9" md="8" lg="6" class="mx-auto">
           <v-alert class="my-3 text-center"
@@ -7,7 +7,7 @@
             outlined
             type="error"
           >
-            No tienes permisos para acceder a esta sección.
+            Hubo un error! Ingresa nuevamente.
           </v-alert>
       </v-col>
     </v-row>
@@ -44,5 +44,8 @@ export default {
   text-transform: uppercase;
   color: #6d4c41;
   font-weight: 600;
+}
+.restringed-view{
+  padding-top: 5rem;
 }
 </style>

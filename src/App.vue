@@ -10,6 +10,7 @@
 
 <script>
 import NavbarComponent from "./components/NavbarComponent.vue";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "App",
@@ -21,6 +22,14 @@ export default {
     return {
       tab: null,
     };
+  },
+  mounted() {
+    this.modifiedUserActive(JSON.parse(localStorage.getItem('userLoged')));
+    
+  },
+  methods: {
+    ...mapMutations(['modifiedUserActive']),
+    ...mapGetters(['getUserActive', 'getItemsCart'])
   },
 };
 </script>

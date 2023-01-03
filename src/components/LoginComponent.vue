@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from "vuex";
+import { mapMutations, mapActions, mapGetters } from "vuex";
 
 export default {
   name: "LoginComponent",
@@ -75,8 +75,9 @@ export default {
     this.getUsersAPI();
   },
   methods: {
-    ...mapMutations(["modifiedUserActive"]),
+    ...mapMutations(["modifiedUserActive", "modifiedUserStorage"]),
     ...mapActions(["getUsersAPI"]),
+    ...mapGetters(['getUserActive', 'getRegistered', 'getUserStorage', 'getItemsCart']),
 
     validate() {
       this.$refs.form.validate();
@@ -91,15 +92,27 @@ export default {
           document.getElementById("alert").classList.add("hidden");
         }, 2500);
       } else {
-        const userFinded = this.$store.state.usersRegistered.find(
+        const userFinded = this.getRegistered().find(
           (user) => user.email == this.email && user.password == this.password
         );
 
         if (userFinded) {
+          const storagePrev = JSON.parse(localStorage.getItem('userLoged'));
+
           //acceder al store y modificar userActive
-          this.modifiedUserActive(userFinded);
-          this.$router.push("/");
+          if(userFinded.email == storagePrev.email){
+            this.modifiedUserActive(storagePrev);
+            this.$router.push("/");
+          }else{
+            this.modifiedUserActive(userFinded);
+            localStorage.setItem('userLoged', JSON.stringify(userFinded));
+            this.$router.push("/");
+          }
+
+        }else{
+          this.$router.push("/acceso-denegado");
         }
+
       }
     },
   },

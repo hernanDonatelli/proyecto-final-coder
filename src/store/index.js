@@ -5,15 +5,27 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    userActive: null,
+    userActive: {
+      admin: null,
+      apellido: null,
+      email: null,
+      id: null,
+      nombre: null,
+      password: null,
+      registrado: null,
+      cantidad: null,
+      userCart: []
+    },
     usersRegistered: [],
     productos: [],
-    myCart: [],
     pedidos: []
   },
   getters: {
     getUserActive(state){
       return state.userActive;
+    },
+    getCartUserActive(state){
+      return state.userActive.userCart;
     },
     getProducts(state){
       return state.productos;
@@ -23,9 +35,6 @@ export default new Vuex.Store({
     },
     getRegistered(state){
       return state.usersRegistered;
-    },
-    getItemsCart(state){
-      return state.myCart;
     },
     getPedidosStore(state) {
       return state.pedidos;
@@ -37,6 +46,7 @@ export default new Vuex.Store({
     },
     logOutUser(state){
       state.userActive = null;
+      // localStorage.clear('userLoged');
     },
     loadUsers(state, usersAPI){
       state.usersRegistered = usersAPI;
@@ -44,11 +54,17 @@ export default new Vuex.Store({
     getProductsMutation(state, productsByApi){
       state.productos = productsByApi;
     },
-    addCartMutation(state, newProductIn){
-      state.myCart.push(newProductIn);
+    addCartUserMutation(state, newProduct){
+      state.userActive.userCart.push(newProduct);
     },
     emptyCartStore(state){
-      state.myCart = [];
+      state.userActive.userCart = [];
+      const storage = JSON.parse(localStorage.getItem('userLoged'));
+      storage.userCart = [];
+      localStorage.setItem('userLoged', JSON.stringify(storage));
+    },
+    deleteItemMutation(state, Id){
+      state.userActive.userCart.splice(Id, 1);
     },
     addPedidosMutation(state, newPedido){
       state.pedidos = newPedido;

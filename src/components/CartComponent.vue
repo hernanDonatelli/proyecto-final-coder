@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row v-if="getItemsCart != 0" class="d-flex justify-end">
+    <v-row v-if="getCartUserActive != 0" class="d-flex justify-end">
       <v-col cols="2">
         <v-btn
           @click="dialogEmpty = true"
@@ -66,7 +66,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(producto, index) of getItemsCart" :key="index">
+          <tr v-for="(producto, index) of getCartUserActive" :key="index">
             <td>{{ index + 1 }}</td>
             <td>{{ producto.nombre }}</td>
             <td>
@@ -215,11 +215,12 @@ export default {
       dialogEmpty: false,
     };
   },
+
   methods: {
-    ...mapMutations(["emptyCartStore"]),
+    ...mapMutations(["emptyCartStore", "deleteItemMutation"]),
 
     subTotalCart() {
-      const itemsInCart = this.getItemsCart.map((item) => item);
+      const itemsInCart = this.getCartUserActive.map((item) => item);
 
       const subTotal = itemsInCart
         .reduce(
@@ -232,12 +233,16 @@ export default {
     },
 
     deleteItem(id) {
-      const itemToDelete = this.getItemsCart.find((item) => {
+      const itemToDelete = this.getCartUserActive.find((item) => {
         return item.id == id;
       });
-      let index = this.getItemsCart.indexOf(itemToDelete);
+      let index = this.getCartUserActive.indexOf(itemToDelete);
 
-      this.getItemsCart.splice(index, 1);
+      this.deleteItemMutation(index);
+
+      localStorage.setItem('userLoged', JSON.stringify(this.getUserActive));
+
+      console.log(this.getUserActive)
 
       this.$toasted.show("Producto Eliminado!!", {
         theme: "bubble",
@@ -247,9 +252,7 @@ export default {
       });
     },
 
-    emptyCart() {
-      this.getItemsCart = [];
-    },
+
 
     postBuy() {
       const individualBuy = {
@@ -257,9 +260,9 @@ export default {
         nombreCliente: this.getUserActive.nombre,
         apellidoCliente: this.getUserActive.apellido,
         totalCompra: (this.subTotalCart() * 1.21).toFixed(2),
-        compra: this.getItemsCart,
         pagado: false,
         enviado: false,
+        userCart: this.getCartUserActive
       };
 
       const upBuyAPI = async () => {
@@ -279,6 +282,7 @@ export default {
         console.log(response);
 
         this.emptyCartStore();
+        localStorage.setItem('userLoged', JSON.stringify(this.getUserActive));
 
         this.$toasted.show("La Compra ha sido exitosa!!", {
           theme: "bubble",
@@ -291,7 +295,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["getItemsCart", "getUserActive"]),
+    ...mapGetters(["getCartUserActive", "getUserActive"]),
   },
 };
 </script>

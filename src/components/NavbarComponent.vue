@@ -58,7 +58,7 @@
             </v-list-item-icon>
             <v-list-item-title>
               <router-link to="/myCart">
-                Cart  (<span>{{ this.getItemsCart().length }}</span>)
+                Cart  (<span>{{ this.getCartUserActive().length }}</span>)
               </router-link>
             </v-list-item-title>
           </v-list-item>
@@ -128,7 +128,7 @@ export default {
   },
   methods: {
     ...mapMutations(["logOutUser"]),
-    ...mapGetters(["getUserActive", "getAdmin", "getItemsCart"]),
+    ...mapGetters(["getUserActive", "getAdmin", "getCartUserActive"]),
 
     logOut() {
       this.logOutUser();

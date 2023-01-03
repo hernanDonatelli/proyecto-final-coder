@@ -10,12 +10,12 @@
             <v-icon color="brown darken-1" dark>
                 mdi-cart-variant
             </v-icon>
-            <span>{{ getItemsCart().length }}</span>
+            <span>{{ getCartUserActive().length }}</span>
         </v-btn>
 
         <p class="mb-0">Bienvenido, <span>{{ getUserActive().nombre }}</span></p>
         <v-btn
-        @click="logOut"
+        @click="this.logOutUser"
         small
         class="mx-3"
         color="amber darken-1">
@@ -31,13 +31,8 @@ import {mapGetters, mapMutations} from 'vuex';
         name: 'UserComponent',
         methods: {
             ...mapMutations(['logOutUser']),
-            ...mapGetters(['getUserActive', 'getItemsCart']),
+            ...mapGetters(['getUserActive', 'getCartUserActive']),
 
-            logOut(){
-                this.logOutUser();
-
-                this.$router.push('/');
-            }
         },
     }
 </script>
