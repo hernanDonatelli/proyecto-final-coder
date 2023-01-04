@@ -2,31 +2,60 @@
   <v-card class="card-product mx-auto my-5" max-width="300" shaped>
     <router-link class="link-product" :to="`/producto/${producto.id}`">
       <v-img height="180" :src="producto.img">
-        <v-dialog v-model="dialog" width="500">
+        <!-- Modal Info Producto -->
+        <v-dialog v-model="dialog" max-width="700">
           <template v-slot:activator="{ on, attrs }">
             <v-btn class="mx-2 mt-1" color="amber darken-1" fab dark small text v-bind="attrs" v-on="on">
               <v-icon>mdi-plus-circle</v-icon>
             </v-btn>
           </template>
 
-          <v-card>
-            <div class="d-flex justify-space-between align-center">
-              <v-img height="170" :src="producto.img"></v-img>
-              <v-card-title>{{ producto.nombre }}</v-card-title>
-              <v-icon class="heart">mdi-heart</v-icon>
-            </div>
+          <v-card class="px-2 py-10" max-width="800">
+            <v-container>
+              <v-row class="d-flex align-center">
+                <v-col>
+                  <v-img height="250" :src="producto.img"></v-img>
+                </v-col>
 
-            <p class="price">${{ producto.precio }}</p>
+                <v-col>
+                  <div class="d-flex justify-between align-center">
+                    <v-card-title class="pl-0">{{ producto.nombre }}</v-card-title>
+                    <!-- <v-icon class="heart">mdi-heart</v-icon> -->
+                    <v-card-actions class="pa-4 d-flex flex-column justify-center">
+                      <v-rating
+                        v-model="rating"
+                        background-color="brown darken-1"
+                        color="amber darken-1"
+                        dense
+                        half-increments
+                        hover
+                        size="18"
+                      ></v-rating>
+                      <span class="grey--text text--lighten-2 text-caption mr-2">
+                        ({{ rating }})
+                      </span>
+                    </v-card-actions>
+                  </div>
 
-            <v-card-text>
-              <v-row align="center" class="mx-0">
-                <div class="my-2 text-subtitle-1">
-                  {{ producto.marca }} • {{ producto.categoria }}
-                </div>
+                  <p class="descripcion mb-5 body-2">{{ producto.descripcion }}</p>
+
+                  <p class="price pl-0">${{ producto.precio }}</p>
+
+                  <v-card-text class="pl-0">
+                    <v-row align="center" class="mx-0">
+                      <div class="my-2 body-2">
+                        {{ producto.marca }} • {{ producto.categoria }}
+                      </div>
+                    </v-row>
+                  </v-card-text>
+                </v-col>
+
               </v-row>
-            </v-card-text>
+            </v-container>
+
           </v-card>
         </v-dialog>
+
       </v-img>
     </router-link>
 
@@ -92,6 +121,7 @@ export default {
     return {
       show: false,
       dialog: false,
+      rating: 4.3
     };
   },
   props: {
@@ -203,4 +233,5 @@ i.heart:hover {
   color: #ff6f00;
   font-size: 1.8rem;
 }
+
 </style>
