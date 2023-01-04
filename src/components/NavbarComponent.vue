@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar absolute shaped color="brown darken-1" dark>
+    <v-app-bar shaped color="brown darken-1" dark>
       <v-app-bar-nav-icon v-if="getUserActive()" @click="drawer = true"></v-app-bar-nav-icon>
 
       <v-toolbar-title class="text-uppercase amber--text"
@@ -11,11 +11,11 @@
 
       <div v-if="!getUserActive()">
 
-        <v-btn to="/login" small color="success" class="mr-3"
+        <v-btn to="/login" small color="info" class="mr-3"
           ><span class="white--text">Ingresar</span></v-btn
         >
-        <v-btn to="/register" small color="grey darken-4"
-          ><span class="white--text">Registrarte</span></v-btn
+        <v-btn to="/register" small color="blue-grey darken-3"
+          ><span class="white--text">Registrate</span></v-btn
         >
       </div>
 

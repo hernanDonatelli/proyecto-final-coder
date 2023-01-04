@@ -5,6 +5,7 @@
     <v-main>
       <router-view />
     </v-main>
+
   </v-app>
 </template>
 
@@ -25,7 +26,7 @@ export default {
   },
   mounted() {
     this.modifiedUserActive(JSON.parse(localStorage.getItem('userLoged')));
-    
+
   },
   methods: {
     ...mapMutations(['modifiedUserActive']),

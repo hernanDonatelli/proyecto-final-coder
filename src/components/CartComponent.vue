@@ -70,16 +70,13 @@
             <td>{{ index + 1 }}</td>
             <td>{{ producto.nombre }}</td>
             <td>
-              <v-btn
-                v-if="producto.cantidad > 0"
+                <v-icon
+                v-if="producto.cantidad >= 1"
                 @click="producto.cantidad--"
-                fab
-                small
-                color="amber accent-2"
-                class="mr-5"
-              >
-                <v-icon>mdi-cart-minus</v-icon>
-              </v-btn>
+                color="brown darken-1" class="mr-5"
+                >
+                mdi-chevron-down
+                </v-icon>
 
               <input
                 class="inputQuantity"
@@ -87,15 +84,13 @@
                 v-model.number="producto.cantidad"
               />
 
-              <v-btn
+              <v-icon
                 @click="producto.cantidad++"
-                fab
-                small
-                color="amber accent-2"
-                class="ml-5"
-              >
-                <v-icon>mdi-cart-plus</v-icon>
-              </v-btn>
+                color="brown darken-1" class="ml-5"
+                >
+                mdi-chevron-up
+              </v-icon>
+
             </td>
             <td>${{ producto.precio }}</td>
 

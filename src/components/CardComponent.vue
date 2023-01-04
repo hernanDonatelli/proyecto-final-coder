@@ -2,26 +2,31 @@
   <v-card class="card-product mx-auto my-5" max-width="300" shaped>
     <router-link class="link-product" :to="`/producto/${producto.id}`">
       <v-img height="180" :src="producto.img">
+
         <!-- Modal Info Producto -->
-        <v-dialog v-model="dialog" max-width="700">
+        <v-dialog id="productDialog" v-model="dialog" :width="$vuetify.breakpoint.xs ? '100vw' : '55vw'">
           <template v-slot:activator="{ on, attrs }">
             <v-btn class="mx-2 mt-1" color="amber darken-1" fab dark small text v-bind="attrs" v-on="on">
               <v-icon>mdi-plus-circle</v-icon>
             </v-btn>
           </template>
 
-          <v-card class="px-2 py-10" max-width="800">
+          <v-card class="px-2">
             <v-container>
-              <v-row class="d-flex align-center">
+              <v-row class="d-flex">
                 <v-col>
                   <v-img height="250" :src="producto.img"></v-img>
                 </v-col>
 
                 <v-col>
-                  <div class="d-flex justify-between align-center">
-                    <v-card-title class="pl-0">{{ producto.nombre }}</v-card-title>
+                  <div class="d-flex flex-column align-start">
+                    <v-card-title class="pl-0 py-0">{{ producto.nombre }}</v-card-title>
                     <!-- <v-icon class="heart">mdi-heart</v-icon> -->
-                    <v-card-actions class="pa-4 d-flex flex-column justify-center">
+
+                    <p class="descripcion mt-2 mb-0 body-2">{{ producto.descripcion }}</p>
+                  </div>
+
+                  <v-card-actions class="pb-4 px-0 d-flex flex-column align-start">
                       <v-rating
                         v-model="rating"
                         background-color="brown darken-1"
@@ -35,9 +40,7 @@
                         ({{ rating }})
                       </span>
                     </v-card-actions>
-                  </div>
 
-                  <p class="descripcion mb-5 body-2">{{ producto.descripcion }}</p>
 
                   <p class="price pl-0">${{ producto.precio }}</p>
 
@@ -55,6 +58,7 @@
 
           </v-card>
         </v-dialog>
+        <!-- Fin modal producto -->
 
       </v-img>
     </router-link>
@@ -69,7 +73,7 @@
     <v-card-text>
       <v-row align="center" class="mx-0">
         <div class="my-2 text-subtitle-1">
-          {{ producto.marca }} • {{ producto.categoria }}
+          <v-text>{{ producto.marca }} • {{ producto.categoria }}</v-text>
         </div>
       </v-row>
     </v-card-text>
@@ -78,11 +82,10 @@
 
     <v-card-actions>
       <v-btn v-if="producto.stock == 0" depressed disabled> Sin Stock </v-btn>
-      <v-btn
+      <v-btn v-else
         @click="addToCart(producto.id)"
         :id="`btn-add-${producto.id}`"
-        v-if="producto.stock > 0"
-        color="amber accent-4"
+        color="amber darken-1"
         text
       >
         Agregar
@@ -187,6 +190,7 @@ export default {
 
 .descripcion {
   font-family: Rubik;
+  color: #6D4C41;
 }
 .card-product{
   position: relative;
@@ -232,6 +236,9 @@ i.heart {
 i.heart:hover {
   color: #ff6f00;
   font-size: 1.8rem;
+}
+.theme--light.v-card > .v-card__text, .theme--light.v-card > .v-card__subtitle{
+  color: rgba(109, 76, 65, .6);
 }
 
 </style>

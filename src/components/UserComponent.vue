@@ -2,7 +2,7 @@
     <div v-if="getUserActive()" class="d-flex align-center">
         <v-btn
         to="/myCart"
-        class="mx-5"
+        class="mx-3"
         fab
         small
         color="amber accent-4"
@@ -13,13 +13,13 @@
             <span>{{ getCartUserActive().length }}</span>
         </v-btn>
 
-        <p class="mb-0">Bienvenido, <span>{{ getUserActive().nombre }}</span></p>
+        <p class="mb-0 mr-3">Bienvenido, <span class="user">{{ getUserActive().nombre }}</span></p>
         <v-btn
         @click="logOut()"
         small
-        class="mx-3"
-        color="amber darken-1">
-            Logout
+        class="mx-3 py-4"
+        color="blue-grey darken-3">
+            <span class="pr-1">Logout</span> <v-icon>mdi-exit-to-app</v-icon>
         </v-btn>
     </div>
 </template>
@@ -35,6 +35,7 @@ import {mapGetters, mapMutations} from 'vuex';
 
             logOut(){
                 this.logOutUser();
+                localStorage.clear();
                 this.$router.push('/');
             }
 
@@ -45,7 +46,7 @@ import {mapGetters, mapMutations} from 'vuex';
 <style scoped>
 p{
     font-family: Rubik;
-    font-size: .75rem;
+    font-size: .8rem;
     color: rgba(255, 255, 255, 0.6);
 }
 span{
@@ -54,6 +55,10 @@ span{
     font-family: Rubik;
     font-size: .8rem;
     color: white;
+}
+span.user{
+    font-size: .9rem;
+    font-weight: 500;
 }
 .v-btn--fab.v-size--small{
     width: 45px;
