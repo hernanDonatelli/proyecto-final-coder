@@ -46,7 +46,6 @@ export default new Vuex.Store({
     },
     logOutUser(state){
       state.userActive = null;
-      // localStorage.clear('userLoged');
     },
     loadUsers(state, usersAPI){
       state.usersRegistered = usersAPI;

@@ -77,7 +77,12 @@ export default {
   methods: {
     ...mapMutations(["modifiedUserActive", "modifiedUserStorage"]),
     ...mapActions(["getUsersAPI"]),
-    ...mapGetters(['getUserActive', 'getRegistered', 'getUserStorage', 'getItemsCart']),
+    ...mapGetters([
+      "getUserActive",
+      "getRegistered",
+      "getUserStorage",
+      "getItemsCart",
+    ]),
 
     validate() {
       this.$refs.form.validate();
@@ -97,22 +102,26 @@ export default {
         );
 
         if (userFinded) {
-          const storagePrev = JSON.parse(localStorage.getItem('userLoged'));
+          const storagePrev = JSON.parse(localStorage.getItem("userLoged"));
 
-          //acceder al store y modificar userActive
-          if(userFinded.email == storagePrev.email){
-            this.modifiedUserActive(storagePrev);
-            this.$router.push("/");
-          }else{
+          if (storagePrev == null) {
+            localStorage.setItem("userLoged", JSON.stringify(userFinded));
             this.modifiedUserActive(userFinded);
-            localStorage.setItem('userLoged', JSON.stringify(userFinded));
             this.$router.push("/");
-          }
+          } else {
 
-        }else{
+            if (userFinded.email == storagePrev.email) {
+              this.modifiedUserActive(JSON.parse(localStorage.getItem('userLoged')));
+              this.$router.push("/");
+            } else {
+              localStorage.setItem("userLoged", JSON.stringify(userFinded));
+              this.modifiedUserActive(userFinded);
+              this.$router.push("/");
+            }
+          }
+        } else {
           this.$router.push("/acceso-denegado");
         }
-
       }
     },
   },

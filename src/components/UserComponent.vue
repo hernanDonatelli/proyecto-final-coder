@@ -15,7 +15,7 @@
 
         <p class="mb-0">Bienvenido, <span>{{ getUserActive().nombre }}</span></p>
         <v-btn
-        @click="this.logOutUser"
+        @click="logOut()"
         small
         class="mx-3"
         color="amber darken-1">
@@ -32,6 +32,11 @@ import {mapGetters, mapMutations} from 'vuex';
         methods: {
             ...mapMutations(['logOutUser']),
             ...mapGetters(['getUserActive', 'getCartUserActive']),
+
+            logOut(){
+                this.logOutUser();
+                this.$router.push('/');
+            }
 
         },
     }
