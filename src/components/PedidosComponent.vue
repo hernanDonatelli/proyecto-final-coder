@@ -6,13 +6,10 @@
           <tr>
             <th class="text-center">Id Pedido</th>
             <th class="text-center">Cliente</th>
-
+            <th class="text-center">Domicilio</th>
             <th class="text-center">Compra</th>
-
             <th class="text-center">Importe</th>
-
             <th class="text-center">Pagado</th>
-
             <th class="text-center">Enviado</th>
           </tr>
         </thead>
@@ -20,6 +17,7 @@
           <tr v-for="(pedido, index) in getPedidosStore()" :key="index">
             <td>{{ pedido.id }}</td>
             <td>{{ pedido.nombreCliente }} {{ pedido.apellidoCliente }}</td>
+            <td>{{ pedido.domicilioCliente }}</td>
             <td>
                 <ul>
                     <li class="d-flex justify-evenly" v-for="(producto, index) in pedido.userCart" :key="index">

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar shaped color="brown darken-1" dark>
+    <v-app-bar absolute shaped color="brown darken-1" dark>
       <v-app-bar-nav-icon v-if="getUserActive()" @click="drawer = true"></v-app-bar-nav-icon>
 
       <v-toolbar-title class="text-uppercase amber--text"
@@ -60,6 +60,15 @@
               <router-link to="/myCart">
                 Cart  (<span>{{ this.getCartUserActive().length }}</span>)
               </router-link>
+            </v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-icon>
+              <v-icon>mdi-badge-account-horizontal-outline</v-icon>
+            </v-list-item-icon>
+            <v-list-item-title>
+              <router-link to="/mi-cuenta">Mi Cuenta</router-link>
             </v-list-item-title>
           </v-list-item>
 

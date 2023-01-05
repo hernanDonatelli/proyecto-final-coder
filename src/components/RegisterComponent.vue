@@ -1,7 +1,6 @@
 <template>
   <v-form id="registerForm" v-model="valid" lazy-validation>
 
-
     <v-text-field
       v-model="nombre"
       :counter="10"
@@ -22,6 +21,12 @@
       v-model.trim="email"
       :rules="emailRules"
       label="E-mail"
+      required
+    ></v-text-field>
+
+    <v-text-field
+      v-model="domicilio"
+      label="Domicilio"
       required
     ></v-text-field>
 
@@ -55,6 +60,7 @@ export default {
     valid: true,
     nombre: "",
     apellido: "",
+    domicilio: "",
     email: "",
     password: "",
     admin: null,
@@ -87,6 +93,7 @@ export default {
       const registerUser = {
         nombre: this.nombre,
         apellido: this.apellido,
+        domicilio: this.domicilio,
         email: this.email,
         password: this.password,
         admin: this.admin,

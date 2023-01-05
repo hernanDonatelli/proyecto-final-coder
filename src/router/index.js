@@ -32,6 +32,11 @@ const routes = [
     component: () => import('../views/RegisterView.vue')
   },
   {
+    path: '/mi-cuenta',
+    name: 'cuenta',
+    component: () => import('../views/UserAccountView.vue')
+  },
+  {
     path: '/acceso-denegado',
     name: 'acceso-denegado',
     component: () => import('../views/AccesoRestringidoView.vue')

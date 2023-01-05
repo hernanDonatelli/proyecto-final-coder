@@ -254,6 +254,7 @@ export default {
         idCliente: this.getUserActive.id,
         nombreCliente: this.getUserActive.nombre,
         apellidoCliente: this.getUserActive.apellido,
+        domicilioCliente: this.getUserActive.domicilio,
         totalCompra: (this.subTotalCart() * 1.21).toFixed(2),
         pagado: false,
         enviado: false,

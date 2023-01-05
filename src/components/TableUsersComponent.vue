@@ -5,13 +5,10 @@
           <tr>
             <th class="text-center">Id</th>
             <th class="text-center">Nombre</th>
-
             <th class="text-center">Apellido</th>
-
             <th class="text-center">Email</th>
-
+            <th class="text-center">Domicilio</th>
             <th class="text-center">Admin</th>
-
             <th class="text-center">Fecha de Registro</th>
           </tr>
         </thead>
@@ -21,6 +18,7 @@
             <td>{{ user.nombre }}</td>
             <td>{{ user.apellido }}</td>
             <td>{{ user.email }}</td>
+            <td>{{ user.domicilio }}</td>
             <td>{{ user.admin ? "Si" : "No" }}</td>
             <td>{{ user.registrado }}</td>
           </tr>
@@ -55,7 +53,7 @@ export default {
 </script>
 
   <style scoped>
- 
+
 tbody {
   text-align: center;
 }
