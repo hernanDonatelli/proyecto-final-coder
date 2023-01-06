@@ -89,6 +89,12 @@ export default new Vuex.Store({
 
       commit('addPedidosMutation', allPedidos);
     },
+    getUsersModified: async ({commit, state}) => {
+      const usersAPI = await fetch(`https://639c6ec816d1763ab149a523.mockapi.io/usuarios/${state.userActive.id}`);
+      const usersResponse = await usersAPI.json();
+
+      commit('modifiedUserActive', usersResponse);
+    }
 
   }
 })

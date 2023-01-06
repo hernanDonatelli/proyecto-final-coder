@@ -1,13 +1,15 @@
 <template>
- <v-container class="pedidos-view">
-    <h1 class="text-h4 text-uppercase text-center pedidos-title my-3">
-      <span>Estado</span>Pedidos
-    </h1>
+  <div id="pedidosView">
+    <v-container class="pedidos-view">
+       <h1 class="text-h4 text-uppercase text-center pedidos-title my-3">
+         <span>Estado</span>Pedidos
+       </h1>
 
-    <v-divider class="mb-10 mt-5 brown darken-1 divider" />
+       <v-divider class="mb-10 mt-5 brown darken-1 divider" />
 
-    <pedidos-component />
- </v-container>
+       <pedidos-component />
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -22,6 +24,13 @@ export default {
 </script>
 
 <style scoped>
+#pedidosView{
+  height: 100%;
+  background-color: #f7f7f7;
+  opacity: 1;
+  background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #f7f7f7 10px ), repeating-linear-gradient( #ffffff55, #ffffff );
+  background-size: cover;
+}
 .pedidos-view{
     padding-top: 5rem;
 }

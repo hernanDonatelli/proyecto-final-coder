@@ -1,13 +1,15 @@
 <template>
-  <v-container class="users-view">
-    <h1 class="text-h4 text-uppercase text-center registrados-title my-3">
-      <span>Usuarios</span>Registrados
-    </h1>
+  <div id="usersView">
+    <v-container class="users-view">
+      <h1 class="text-h4 text-uppercase text-center registrados-title my-3">
+        <span>Usuarios</span>Registrados
+      </h1>
 
-    <v-divider class="brown darken-1" />
+      <v-divider class="brown darken-1" />
 
-    <table-users-component />
-  </v-container>
+      <table-users-component />
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -22,6 +24,13 @@ export default {
 </script>
 
 <style scoped>
+#usersView{
+  height: 100%;
+  background-color: #f7f7f7;
+  opacity: 1;
+  background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #f7f7f7 10px ), repeating-linear-gradient( #ffffff55, #ffffff );
+  background-size: cover;
+}
 .users-view {
   padding-top: 5rem;
 }

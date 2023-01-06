@@ -1,17 +1,18 @@
 <template>
-  <v-container class="products-view">
-    <h1 class="text-h4 text-uppercase text-center registrados-title my-3">
-      <span>Listado</span>Productos
-    </h1>
+  <div id="productsView">
+    <v-container class="products-view">
+      <h1 class="text-h4 text-uppercase text-center registrados-title my-3">
+        <span>Listado</span>Productos
+      </h1>
 
-    <v-divider class="brown darken-1" />
+      <v-divider class="brown darken-1" />
 
-    <create-products-component />
+      <create-products-component />
 
-    <table-products-component class="table-view" />
+      <table-products-component class="table-view" />
 
-
-  </v-container>
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -28,6 +29,14 @@ export default {
 </script>
 
 <style scoped>
+#productsView{
+  height: 100%;
+  background-color: #f7f7f7;
+  opacity: 1;
+  background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #f7f7f7 10px ), repeating-linear-gradient( #ffffff55, #ffffff );
+  background-size: cover;
+
+}
 .products-view{
   padding-top: 5rem;
   position: relative;

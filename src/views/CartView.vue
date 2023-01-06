@@ -1,13 +1,15 @@
-<template>
-  <v-container class="cartView">
-    <h1 class="text-h4 text-uppercase text-center cart-title my-5">
-      <span>Mi</span>Carrito
-    </h1>
+<template id="cartTemplate">
+  <div id="cartView">
+    <v-container class="cartView">
+      <h1 class="text-h4 text-uppercase text-center cart-title my-5">
+        <span>Mi</span>Carrito
+      </h1>
 
-    <v-divider class="brown darken-1" />
+      <v-divider class="brown darken-1" />
 
-    <cart-component />
-  </v-container>
+      <cart-component />
+    </v-container>
+  </div>
 </template>
 
 <script>
@@ -22,6 +24,13 @@ export default {
 </script>
 
 <style scoped>
+#cartView{
+  height: 100%;
+  background-color: #f7f7f7;
+  opacity: 1;
+  background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #f7f7f7 10px ), repeating-linear-gradient( #ffffff55, #ffffff );
+  background-size: cover;
+}
 .cartView {
   margin-top: 56px;
 }

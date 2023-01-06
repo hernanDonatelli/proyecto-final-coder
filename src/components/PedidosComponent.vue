@@ -52,6 +52,11 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "PedidosComponent",
+  data() {
+    return {
+
+    }
+  },
   created() {
     this.getPedidosAPI();
   },

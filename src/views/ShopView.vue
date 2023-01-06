@@ -1,14 +1,11 @@
 <template>
-  <v-container class="shopView">
-      <v-row class="text-left mt-5">
-        <v-col>
-          <h1 class="shop-title text-center my-5"><span>Nuestros</span>Productos</h1>
-        </v-col>
-      </v-row>
+  <div id="shopView">
+    <v-container class="shopView">
 
-      <v-divider class="mb-10 brown darken-1"></v-divider>
-    <shop-component />
-    </v-container>
+      <shop-component />
+
+      </v-container>
+  </div>
 </template>
 
 <script>
@@ -18,32 +15,20 @@ export default {
   name: "ShopView",
   components: {
     ShopComponent,
-  },
+
+  }
+
 };
 </script>
 
 <style scoped>
-#shop{
-  background-color: #fafafa;
-}
-hr{
-  display: block;
-    width: 15%;
-    margin: 0 auto;
-    border: 1.5px solid black;
+#shopView{
+  height: 100%;
+  background-color: #f7f7f7;
+  opacity: 1;
+  background-image:  repeating-radial-gradient( circle at 0 0, transparent 0, #f7f7f7 10px ), repeating-linear-gradient( #ffffff55, #ffffff );
 }
 .shopView{
   padding-top: 56px;
-}
-.shop-title,
-.shop-title span{
-  letter-spacing: 0.001rem;
-  font-family: Roboto;
-  text-transform: uppercase;
-  color: #6D4C41;
-  font-weight: 600;
-}
-.shop-title span{
-  font-weight: 200;
 }
 </style>
