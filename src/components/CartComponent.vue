@@ -1,10 +1,10 @@
 <template>
   <div>
     <v-row v-if="getCartUserActive != 0" class="d-flex justify-end">
-      <v-col cols="2">
+      <v-col class="mx-auto" xs="6" sm="4" lg="3">
         <v-btn
           @click="dialogEmpty = true"
-          class="mb-0 mr-5 white--text"
+          class="my-5 mr-5 white--text"
           block
           color="red darken-2"
         >
@@ -69,11 +69,11 @@
           <tr v-for="(producto, index) of getCartUserActive" :key="index">
             <td>{{ index + 1 }}</td>
             <td>{{ producto.nombre }}</td>
-            <td>
+            <td class="alto-columna d-sm-flex align-sm-center h-100 flex-sm-wrap align-sm-content-center justify-md-center">
                 <v-icon
                 v-if="producto.cantidad >= 1"
                 @click="producto.cantidad--"
-                color="brown darken-1" class="mr-5"
+                color="brown darken-1" class="mr-0"
                 >
                 mdi-chevron-down
                 </v-icon>
@@ -86,7 +86,7 @@
 
               <v-icon
                 @click="producto.cantidad++"
-                color="brown darken-1" class="ml-5"
+                color="brown darken-1" class="ml-0"
                 >
                 mdi-chevron-up
               </v-icon>
@@ -124,15 +124,15 @@
       </template>
     </v-simple-table>
 
-    <v-row v-if="subTotalCart() != 0" class="mt-3 pr-10">
-      <v-col class="d-flex justify-start align-center" cols="4">
+    <v-row v-if="subTotalCart() != 0" class="mt-3 flex-column flex-lg-row align-lg-center">
+      <v-col class="d-flex justify-center align-center order-3 order-lg-1 justify-lg-start" xs="12" lg="4">
         <v-icon id="store">mdi-arrow-left-bold-circle-outline</v-icon>
         <router-link class="ml-3" id="buyNext" to="/shop"
           >Seguir Comprando?</router-link
         >
       </v-col>
 
-      <v-col cols="4" class="pt-7">
+      <v-col xs="12" sm="6" lg="3" class="mb-5 order-2 mx-auto">
         <v-btn @click="dialog = true" class="mb-0" block color="teal accent-3">
           Procesar Compra
         </v-btn>
@@ -179,12 +179,12 @@
         </v-row>
       </v-col>
 
-      <v-col cols="4" class="d-flex flex-column justify-end pa-2">
-        <p class="text-right my-2">
+      <v-col xs="12" lg="4" class="d-flex flex-column justify-center pa-2 order-1 order-lg-3">
+        <p class="text-center text-lg-right pr-lg-5 my-2">
           SubTotal: <strong>${{ subTotalCart() }}</strong>
         </p>
 
-        <p class="text-right my-2">
+        <p class="text-center text-lg-right pr-lg-5 mb-0">
           Total (+21% IVA):
           <strong>${{ (subTotalCart() * 1.21).toFixed(2) }}</strong>
         </p>
@@ -297,11 +297,14 @@ export default {
 </script>
 
 <style scoped>
+.alto-columna{
+  height: 100% !important;
+}
 .v-data-table {
   line-height: 4.5;
 }
 .inputQuantity {
-  width: 30px;
+  width: 20px;
   text-align: center;
 }
 #buyNext {

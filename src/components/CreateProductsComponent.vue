@@ -5,7 +5,7 @@
       <v-dialog v-model="dialog" persistent max-width="700px">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
-            class="create-button"
+            class="create-button mt-5"
             color="brown darken-1"
             dark
             v-bind="attrs"
@@ -229,10 +229,5 @@ hr.theme--light.v-divider {
   border-color: unset;
   border: 2px solid #6d4c41;
   margin-left: 5%;
-}
-.create-button {
-  position: absolute;
-  top: 6%;
-  right: 3%;
 }
 </style>

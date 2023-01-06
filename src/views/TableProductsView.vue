@@ -5,7 +5,7 @@
         <span>Listado</span>Productos
       </h1>
 
-      <v-divider class="brown darken-1" />
+      <v-divider class="brown darken-1 mb-5" />
 
       <create-products-component />
 

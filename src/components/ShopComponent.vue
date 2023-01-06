@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-row class="text-left mt-5 d-flex align-center">
-      <v-col xs="12" lg="7">
+    <v-row class="text-left mt-5 d-flex flex-column align-center flex-md-row">
+      <v-col xs="12" md="7">
         <h1 class="shop-title text-left my-5">
           <span>Nuestros</span>Productos
         </h1>
@@ -9,7 +9,7 @@
       </v-col>
 
       <!-- Buscadores -->
-      <v-col xs="12" lg="5">
+      <v-col xs="12" sm="8" md="5">
         <!-- Buscador por nombre -->
         <div>
           <div id="inputSearch">
@@ -20,7 +20,7 @@
         </div>
 
         <!-- Slider precio -->
-          <div id="rangeSearch" class="pb-0 mt-2">
+          <div id="rangeSearch" class="pb-0 my-5">
             <v-slider
               color="brown darken-1"
               track-color="brown darken-1"
@@ -35,8 +35,8 @@
 
         <!-- Radio buttons -->
         <div id="checkSearch">
-          <v-radio-group v-model="radioGroup" class="mt-2">
-            <v-row class="justify-space-around">
+          <v-radio-group v-model="radioGroup" class="pl-3 mt-2">
+            <v-row class="flex-column">
               <v-radio class="mb-0"
                 color="brown darken-1"
                 label="Todos"

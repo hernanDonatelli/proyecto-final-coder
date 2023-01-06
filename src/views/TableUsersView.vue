@@ -1,7 +1,7 @@
 <template>
   <div id="usersView">
     <v-container class="users-view">
-      <h1 class="text-h4 text-uppercase text-center registrados-title my-3">
+      <h1 class="text-uppercase text-center registrados-title my-3">
         <span>Usuarios</span>Registrados
       </h1>
 

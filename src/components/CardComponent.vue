@@ -1,5 +1,5 @@
 <template>
-  <v-col md="3">
+  <v-col md="4" lg="3" xl="2">
     <v-card class="card-product mx-auto my-5" max-width="300" shaped>
       <router-link class="link-product" :to="`/producto/${producto.id}`">
         <v-img height="180" :src="producto.img">
@@ -242,5 +242,7 @@ i.heart:hover {
 .theme--light.v-card > .v-card__text, .theme--light.v-card > .v-card__subtitle{
   color: rgba(109, 76, 65, .6);
 }
+
+
 
 </style>
