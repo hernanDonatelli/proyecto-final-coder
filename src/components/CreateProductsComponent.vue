@@ -88,6 +88,7 @@
                 <v-col class="py-0" cols="6">
                   <v-btn
                     block
+                    text
                     color="red darken-3 white--text"
                     class="mr-4"
                     @click="dialog = false"
@@ -98,6 +99,7 @@
                 <v-col class="py-0" cols="6">
                   <v-btn
                     block
+                    text
                     color="success"
                     class="mr-4"
                     @click="postCreateProduct"

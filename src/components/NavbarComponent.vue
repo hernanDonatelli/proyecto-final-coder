@@ -10,13 +10,14 @@
       <v-spacer></v-spacer>
 
       <div v-if="!getUserActive()">
-
-        <v-btn to="/login" small color="info" class="mr-3"
-          ><span class="white--text">Ingresar</span></v-btn
-        >
-        <v-btn to="/register" small color="blue-grey darken-3"
-          ><span class="white--text">Registrate</span></v-btn
-        >
+        <v-row>
+          <v-btn to="/login" text small color="info" class="mr-2 px-0"
+            ><span class="white--text font-weight-regular">Ingresa</span></v-btn
+          >
+          <v-btn to="/register" text small color="blue-grey darken-3" class="px-0 pr-3"
+            ><span class="white--text font-weight-regular">Registrate</span></v-btn
+          >
+        </v-row>
       </div>
 
       <user-component />

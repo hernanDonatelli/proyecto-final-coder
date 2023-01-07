@@ -58,33 +58,38 @@
               <v-card-text>
                 <v-container>
                   <v-row>
-                    <v-col cols="12" sm="6" md="4">
+                    <v-col cols="12" sm="6">
                       <v-text-field
                         v-model="nombre"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
-                      <v-text-field
+                        label="Nombre"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6">
+                        <v-text-field
                         v-model="apellido"
-                      ></v-text-field>
-                    </v-col>
-                    <v-col cols="12" sm="6" md="4">
+                        label="Apellido"
+                        ></v-text-field>
+                      </v-col>
+                    <v-col cols="12" sm="6">
                       <v-text-field
                         v-model="email"
+                        label="email"
+                        hint="dirección email valida, con @ y ."
                       ></v-text-field>
-                    </v-col>
-
-                    <v-col cols="12">
-                      <v-textarea
-                        v-model="password"
-                        name="input-7-1"
-                        hint="Letras, numeros, signos, etc..."
-                      ></v-textarea>
                     </v-col>
 
                     <v-col cols="6">
                       <v-text-field
+                        v-model="password"
+                        label="Password"
+                        hint="Letras, numeros, signos, etc..."
+                        ></v-text-field>
+                      </v-col>
+
+                      <v-col cols="12">
+                        <v-text-field
                         v-model="domicilio"
+                        label="Domicilio"
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -167,7 +172,6 @@ export default {
   },
   created() {
     this.getUsersAPI();
-    this.getUsersModified();
     this.getPedidosAPI();
   },
   methods: {
@@ -192,7 +196,8 @@ export default {
         apellido: this.apellido,
         email: this.email,
         password: this.password,
-        domicilio: this.domicilio
+        domicilio: this.domicilio,
+        userCart: this.getCartUserActive
       };
 
       //Enviar usuario editado a la API
@@ -225,7 +230,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(["getUserActive", "getRegistered", "getPedidosStore"]),
+    ...mapGetters(["getUserActive", "getRegistered", "getPedidosStore", "getCartUserActive"]),
   },
 };
 </script>

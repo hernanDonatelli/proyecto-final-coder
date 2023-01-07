@@ -16,10 +16,11 @@
         <p class="mb-0 mr-3">Bienvenido, <span class="user">{{ getUserActive().nombre }}</span></p>
         <v-btn
         @click="logOut()"
+        text
         small
-        class="mx-3 py-4"
-        color="blue-grey darken-3">
-            <span class="pr-1">Logout</span> <v-icon>mdi-exit-to-app</v-icon>
+        class="py-4"
+        color="amber accent-3">
+            <span class="logout pr-1">Logout</span> <v-icon>mdi-exit-to-app</v-icon>
         </v-btn>
     </div>
 </template>
@@ -59,6 +60,10 @@ span{
 span.user{
     font-size: .9rem;
     font-weight: 500;
+}
+span.logout{
+    color: #FFC400;
+    font-weight: normal;
 }
 .v-btn--fab.v-size--small{
     width: 45px;
