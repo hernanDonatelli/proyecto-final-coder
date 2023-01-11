@@ -52,7 +52,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(["getUsersAPI"]),
+    ...mapActions(["getUsersAPI", "getUsersModified"]),
     ...mapGetters(["getRegistered"]),
 
     getUsers() {
@@ -90,7 +90,7 @@ export default {
         console.log(response);
 
         this.getUsersAPI();
-
+        this.getUsersModified();
       };
 
       editarAdmin();

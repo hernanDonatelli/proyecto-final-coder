@@ -66,7 +66,6 @@
 
       <div class="d-flex justify-space-between align-center">
         <v-card-title>{{ producto.nombre }}</v-card-title>
-        <v-icon class="heart">mdi-heart</v-icon>
       </div>
 
       <p class="price">${{ producto.precio }}</p>

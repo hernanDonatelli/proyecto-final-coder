@@ -5,6 +5,7 @@
         <thead>
           <tr>
             <th class="text-center">Id</th>
+            <th class="text-center">Ingresado/Modificado</th>
             <th class="text-center">Nombre</th>
 
             <th class="text-center">Marca</th>
@@ -23,6 +24,7 @@
         <tbody>
           <tr v-for="product in getProducts" :key="product.id">
             <td>{{ product.id }}</td>
+            <td>{{ product.ingresado }}</td>
             <td>{{ product.nombre }}</td>
             <td>{{ product.marca }}</td>
             <td>{{ product.categoria }}</td>
@@ -168,6 +170,7 @@ export default {
       precio: null,
       stock: null,
       categoria: "",
+      ingresado: null,
       id: null,
       descripcion: "",
     };
@@ -203,7 +206,8 @@ export default {
         stock: this.stock,
         categoria: this.categoria,
         img: this.img,
-        descripcion: this.descripcion
+        descripcion: this.descripcion,
+        ingresado: new Date().toLocaleString()
       };
 
       //Enviar producto editado a la API
@@ -224,6 +228,10 @@ export default {
         console.log(response);
 
         this.dialog = false;
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       };
 
       editProductAPI();

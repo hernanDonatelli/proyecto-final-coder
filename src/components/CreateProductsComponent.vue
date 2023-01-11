@@ -162,6 +162,7 @@ export default {
         stock: this.createStock,
         categoria: this.createCategoria,
         descripcion: this.createDescripcion,
+        ingresado: new Date().toLocaleString()
       };
 
       const createProductAPI = async () => {
@@ -192,9 +193,9 @@ export default {
           setTimeout(() => {
             document.getElementById("createSuccess").classList.remove("visible");
             document.getElementById("createSuccess").classList.add("hidden");
-            this.$router.push("/admin-productos");
-          }, 2000);
-        }, 1500);
+            window.location.reload();
+          }, 1500);
+        }, 2500);
       };
       createProductAPI();
     },
