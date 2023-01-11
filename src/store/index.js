@@ -28,6 +28,7 @@ export default new Vuex.Store({
       return state.userActive.userCart;
     },
     getProducts(state){
+      state.productos.sort((a, b) => a.id - b.id);
       return state.productos;
     },
     getAdmin(state){
@@ -98,6 +99,6 @@ export default new Vuex.Store({
 
       commit('modifiedUserActive', usersResponse);
     },
-    
+
   }
 })

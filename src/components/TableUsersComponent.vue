@@ -22,9 +22,9 @@
             <td>
                 <v-switch
                     v-model="user.admin"
-                    class="d-flex justify-content-center"
+                    class="d-flex justify-center"
                     color="success"
-                    @change="putEditUser(user.id)"
+                    @change="putEditAdmin(user.id)"
                 ></v-switch>
             </td>
             <td>{{ user.registrado }}</td>
@@ -59,7 +59,7 @@ export default {
       return this.getRegistered();
     },
 
-    putEditUser(id) {
+    putEditAdmin(id) {
       const idSeleccionado = this.getRegistered().find((user) => user.id == id);
 
       this.id = idSeleccionado.id;

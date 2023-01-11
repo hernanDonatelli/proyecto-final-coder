@@ -6,6 +6,11 @@
               <p class="ma-0">El email que intenta registrar ya existe.</p>
           </v-alert>
         </div>
+        <div id="alertSuccess" :class="classeSuccess" v-if="classeSuccess != 'hidden'">
+          <v-alert border="left" color="teal accent-4" text icon="mdi-check-decagram">
+              <p class="ma-0">El registro ha sido exitoso. Ya puedes ingresar al sistema!</p>
+          </v-alert>
+        </div>
         <v-form id="registerForm" v-model="valid" lazy-validation>
             <v-text-field
                 v-model="nombre"
@@ -80,6 +85,7 @@ export default {
         admin: false,
         show1: false,
         classe: 'hidden',
+        classeSuccess: 'hidden',
         rules: {
             required: (value) => !!value || "Requerido.",
             min: (v) => v.length >= 6 || "Min 6 caracteres",
@@ -110,6 +116,7 @@ export default {
 
         postRegisterUser(e) {
             e.preventDefault();
+
             const registerUser = {
                 nombre: this.nombre,
                 apellido: this.apellido,
@@ -117,7 +124,7 @@ export default {
                 email: this.email,
                 password: this.password,
                 admin: false,
-                registrado: new Date().toLocaleDateString()
+                registrado: new Date().toLocaleString()
             };
 
             const emailFind = this.getRegistered.find(
@@ -146,7 +153,15 @@ export default {
                     );
                     const response = await postUser.json();
 
-                    console.log(response);
+                    if(response){
+                        this.classeSuccess = 'visible';
+
+                        setTimeout(() => {
+                            this.classeSuccess = 'hidden';
+                            document.getElementById('registerForm').reset();
+                            this.$router.push('/login');
+                        }, 3000);
+                    }
 
                 };
 

@@ -157,9 +157,13 @@
                   Aceptado este paso finalizará el proceso de compra y le
                   enviaremos un mail con la información para abonar el pedido.
                 </p>
-                <p>
+                <p class="mb-0">
                   El total de su compra es de
                   <strong>${{ (subTotalCart() * 1.21).toFixed(2) }}</strong>
+                </p>
+                <p class="mt-0">
+                  Pago en efectivo (-10%)
+                  <strong>${{ ((subTotalCart() * 1.21) - ((subTotalCart() * 0.1) * 1.21)).toFixed(2) }}</strong>
                 </p>
               </v-card-text>
 
@@ -180,13 +184,21 @@
       </v-col>
 
       <v-col xs="12" lg="4" class="d-flex flex-column justify-center pa-2 order-1 order-lg-3">
-        <p class="text-center text-lg-right pr-lg-5 my-2">
+        <p class="text-center text-lg-right pr-lg-5 my-0">
           SubTotal: <strong>${{ subTotalCart() }}</strong>
         </p>
 
+        <p class="text-center text-lg-right pr-lg-5 my-0">
+          IVA +21%:
+          <strong>${{ (subTotalCart() * 0.21).toFixed(2) }}</strong>
+        </p>
+
+        <p class="text-center text-lg-right pr-lg-5 mt-2 mb-0">
+          <strong>Total: ${{ (subTotalCart() * 1.21).toFixed(2) }}</strong>
+        </p>
         <p class="text-center text-lg-right pr-lg-5 mb-0">
-          Total (+21% IVA):
-          <strong>${{ (subTotalCart() * 1.21).toFixed(2) }}</strong>
+          Pago efectivo (descuento -10%):
+          <strong>${{ ((subTotalCart() * 1.21) - ((subTotalCart() * 0.1) * 1.21)).toFixed(2) }}</strong>
         </p>
       </v-col>
     </v-row>
@@ -258,7 +270,8 @@ export default {
         totalCompra: (this.subTotalCart() * 1.21).toFixed(2),
         pagado: false,
         enviado: false,
-        userCart: this.getCartUserActive
+        userCart: this.getCartUserActive,
+        fechaPedido: new Date().toLocaleString()
       };
 
       const upBuyAPI = async () => {

@@ -13,7 +13,7 @@
             <span>{{ getCartUserActive().length }}</span>
         </v-btn>
 
-        <p class="mb-0 mr-3">Bienvenido, <span class="user">{{ getUserActive().nombre }}</span></p>
+        <p class="mb-0 mr-3">Bienvenido/a, <span class="user">{{ getUserActive().nombre }}</span></p>
         <v-btn
         @click="logOut()"
         text
