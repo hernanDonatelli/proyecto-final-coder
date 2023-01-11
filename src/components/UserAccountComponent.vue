@@ -217,6 +217,14 @@ export default {
         const response = await putEditUser.json();
         console.log(response);
 
+        this.getUsersModified();
+
+        localStorage.setItem('userLoged', JSON.stringify(editedUser));
+
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+
         this.dialog = false;
       };
 

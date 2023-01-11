@@ -77,12 +77,7 @@ export default {
   methods: {
     ...mapMutations(["modifiedUserActive", "modifiedUserStorage"]),
     ...mapActions(["getUsersAPI"]),
-    ...mapGetters([
-      "getUserActive",
-      "getRegistered",
-      "getUserStorage",
-      "getItemsCart",
-    ]),
+
 
     validate() {
       this.$refs.form.validate();
@@ -97,14 +92,14 @@ export default {
           document.getElementById("alert").classList.add("hidden");
         }, 2500);
       } else {
-        const userFinded = this.getRegistered().find(
+        const userFinded = this.getRegistered.find(
           (user) => user.email == this.email && user.password == this.password
         );
 
         if (userFinded) {
           const storagePrev = JSON.parse(localStorage.getItem("userLoged"));
 
-          if (storagePrev == null) {
+          if (!storagePrev) {
             localStorage.setItem("userLoged", JSON.stringify(userFinded));
             this.modifiedUserActive(userFinded);
             this.$router.push("/");
@@ -125,6 +120,14 @@ export default {
       }
     },
   },
+  computed: {
+    ...mapGetters([
+      "getUserActive",
+      "getRegistered",
+      "getUserStorage",
+      "getItemsCart",
+    ]),
+  }
 };
 </script>
 

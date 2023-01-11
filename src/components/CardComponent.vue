@@ -166,7 +166,7 @@ export default {
 
           //A medida que agrego un item se actualiza el localStorage
           const cartJSON = JSON.stringify(actualCart);
-          localStorage.setItem('userLoged', cartJSON)
+          localStorage.setItem('userLoged', cartJSON);
 
 
           this.$toasted.show("Producto Agregado!!", {

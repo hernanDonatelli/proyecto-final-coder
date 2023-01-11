@@ -19,7 +19,14 @@
             <td>{{ user.apellido }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.domicilio }}</td>
-            <td>{{ user.admin ? "Si" : "No" }}</td>
+            <td>
+                <v-switch
+                    v-model="user.admin"
+                    class="d-flex justify-content-center"
+                    color="success"
+                    @change="putEditUser(user.id)"
+                ></v-switch>
+            </td>
             <td>{{ user.registrado }}</td>
           </tr>
         </tbody>
@@ -34,7 +41,10 @@ import { mapActions, mapGetters } from "vuex";
 export default {
   name: "TableUsersComponent",
   data() {
-    return {};
+    return {
+      id: null,
+      admin: null
+    };
   },
 
   created() {
@@ -42,12 +52,49 @@ export default {
   },
 
   methods: {
-    ...mapGetters(["getRegistered"]),
     ...mapActions(["getUsersAPI"]),
+    ...mapGetters(["getRegistered"]),
 
     getUsers() {
       return this.getRegistered();
     },
+
+    putEditUser(id) {
+      const idSeleccionado = this.getRegistered().find((user) => user.id == id);
+
+      this.id = idSeleccionado.id;
+      this.admin = idSeleccionado.admin
+
+      this.admin ? !this.admin : this.admin;
+
+      const editedUser = {
+        id: this.id,
+        admin: this.admin
+      };
+
+      //Enviar usuario editado a la API
+      const editarAdmin = async () => {
+        const options = {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(editedUser),
+        };
+
+        const putEditUser = await fetch(
+          `https://639c6ec816d1763ab149a523.mockapi.io/usuarios/${this.id}`,
+          options
+        );
+        const response = await putEditUser.json();
+        console.log(response);
+
+        this.getUsersAPI();
+
+      };
+
+      editarAdmin();
+    }
   },
 };
 </script>

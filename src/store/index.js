@@ -67,6 +67,9 @@ export default new Vuex.Store({
     },
     addPedidosMutation(state, newPedido){
       state.pedidos = newPedido;
+    },
+    modifiedStateAdmin(state, editUser){
+      state.usersRegistered = editUser;
     }
 
   },
@@ -94,7 +97,7 @@ export default new Vuex.Store({
       const usersResponse = await usersAPI.json();
 
       commit('modifiedUserActive', usersResponse);
-    }
-
+    },
+    
   }
 })
