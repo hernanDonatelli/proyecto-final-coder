@@ -15,7 +15,7 @@
 </ul>
 
 <h2>Usabilidad</h2>
-<h3>Cliente Administrador</h3>
+<h3>Usuario Administrador</h3>
 <p>User: <strong>admin@coder.com</strong></p>
 <p>Pass: <strong>111111</strong></p>
 <p>El usuario Administrador posee un menu diferente al de un usuario-cliente, cuyos items son:</p>
@@ -24,18 +24,35 @@
     Productos: posee un listado de todos los productos de la App, pudiendo crear nuevos, modificar y eliminar los existentes.
     </li>
     <li>
-    Usuarios: listado de usuarios con los datos de registración y con la opción de cambiar el rol de determinado usuario, ya sea de Admin a Cliente o viceversa.
+    Usuarios: listado de usuarios con los datos de registración y con la opción de cambiar el rol de determinado usuario, ya sea de Admin a Cliente o viceversa mediante un "switch".
     </li>
     <li>
     Pedidos: aquí se listan los pedidos de los clientes, los cuales tienen 2 fases: pagados y enviados. Estas funcionalidades se habilitan mediante un "switch": cuando abonen se habilita el Envío a domicilio. Cuando se envia, la fila se resalta el fondo para entender que el pedido está completado.
     </li>
 </ul>
 
+<h3>Usuario Cliente</h3>
+<p>User: <strong>user@coder.com</strong></p>
+<p>Pass: <strong>222222</strong></p>
+<p>El usuario Cliente posee un menu con los siguientes items:</p>
+<ul>
+    <li>
+    Productos: Aqui se listan todos los productos del ecommerce. Puede agregarlos al carrito de compras, puede ampliar el producto para ver mas detalles del mismo. Tambien puede filtrar una busqueda por nombre, precio y marca, individuales o en conjunto.
+    </li>
+    <li>
+    Carrito: en el carrito puede modificar cantidades, eliminar items individualmente o vaciar el carrito. Al hacer estas acciones el valor total de la compra varía de acuerdo a las cantidades y precios unitarios del producto. Si continúa la app le pide una confirmación y se procede a realizar la compra, pudiendo ver en el siguiente apartado su pedido realizado y en que estado se encuentra.
+    </li>
+    <li>
+    Cuenta: en este apartado el usuario ve sus datos de cuando se registró, los cuales puede editar. Tambien puede observar su historial de pedidos, y el estado en el cual estos se encuentran (pagado-enviado).
+    </li>
+</ul>
+
+<h2>Autor</h2>
+<ul>
+    <li>Hernán Donatelli</li>
+</ul>
 
 
-
-
-# proyecto-final-coder
 
 ## Project setup
 ```
