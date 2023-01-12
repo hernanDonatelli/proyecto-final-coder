@@ -15,6 +15,10 @@
 </ul>
 
 <h2>Usabilidad</h2>
+<p>
+El sistema provee de 2 clases de usuarios: Administrador y Cliente. Cada uno de ellos tienen diferentes menúes, que serán visibles de acuerdo al rol que poseen.
+</p>
+
 <h3>Usuario Administrador</h3>
 <p><strong>User:</strong> admin@coder.com</p>
 <p><strong>Pass:</strong> 111111</p>
