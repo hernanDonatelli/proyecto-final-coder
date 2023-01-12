@@ -16,8 +16,8 @@
 
 <h2>Usabilidad</h2>
 <h3>Usuario Administrador</h3>
-<p>User: <strong>admin@coder.com</strong></p>
-<p>Pass: <strong>111111</strong></p>
+<p><strong>User:</strong> admin@coder.com</p>
+<p><strong>Pass:</strong> 111111</p>
 <p>El usuario Administrador posee un menu diferente al de un usuario-cliente, cuyos items son:</p>
 <ul>
     <li>
@@ -32,8 +32,8 @@
 </ul>
 
 <h3>Usuario Cliente</h3>
-<p>User: <strong>user@coder.com</strong></p>
-<p>Pass: <strong>222222</strong></p>
+<p><strong>User:</strong> user@coder.com</p>
+<p><strong>Pass:</strong> 222222</p>
 <p>El usuario Cliente posee un menu con los siguientes items:</p>
 <ul>
     <li>
@@ -51,28 +51,3 @@
 <ul>
     <li>Hernán Donatelli</li>
 </ul>
-
-
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
