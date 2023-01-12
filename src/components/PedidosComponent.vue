@@ -158,7 +158,7 @@ tbody tr:hover{
 
 .enviado{
     background-color: #00BFA5;
-    color: #00695C;
+    color: #00796B;
     transition: background-color .5s ease-in-out;
 }
 .no-enviado{

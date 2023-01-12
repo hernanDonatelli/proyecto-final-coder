@@ -1,17 +1,20 @@
 <template>
     <div v-if="getUserActive()" class="d-flex align-center">
-        <v-btn
-        to="/myCart"
-        class="mx-3"
-        fab
-        small
-        color="amber accent-4"
-        >
-            <v-icon color="brown darken-1" dark>
-                mdi-cart-variant
-            </v-icon>
-            <span>{{ getCartUserActive().length }}</span>
-        </v-btn>
+        <div v-if="!getUserActive().admin">
+            <v-btn
+            to="/myCart"
+            class="mx-3"
+            fab
+            small
+            color="amber accent-4"
+            >
+                <v-icon color="brown darken-1" dark>
+                    mdi-cart-variant
+                </v-icon>
+                <span>{{ getCartUserActive().length }}</span>
+            </v-btn>
+
+        </div>
 
         <p class="mb-0 mr-3">Bienvenido/a, <span class="user">{{ getUserActive().nombre }}</span></p>
         <v-btn
