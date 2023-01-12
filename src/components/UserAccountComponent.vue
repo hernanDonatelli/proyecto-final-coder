@@ -136,11 +136,29 @@
             <td>{{ pedido.id }}</td>
             <td>{{ pedido.domicilioCliente }}</td>
             <td>
-                <ul>
-                    <li class="d-flex justify-evenly" v-for="(producto, index) in pedido.userCart" :key="index">
-                        <span>* {{ producto.nombre }} (x{{ producto.cantidad }})</span>
+              <v-tooltip
+                v-model="pedido.compra"
+                top
+                close-delay="250"
+                color="brown accent-1"
+              >
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn
+                    icon
+                    v-bind="attrs"
+                    v-on="on"
+                  >
+                    <v-icon color="brown accent-1">
+                      mdi-cart
+                    </v-icon>
+                  </v-btn>
+                </template>
+                <ol>
+                    <li class="" v-for="(producto, index) in pedido.userCart" :key="index">
+                        <span>{{ producto.nombre }} (x{{ producto.cantidad }})</span>
                     </li>
-                </ul>
+                </ol>
+              </v-tooltip>
             </td>
             <td>{{ pedido.totalCompra }}</td>
             <td>{{ pedido.pagado ? 'Si' : 'No' }}</td>

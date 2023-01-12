@@ -249,8 +249,6 @@ export default {
 
       localStorage.setItem('userLoged', JSON.stringify(this.getUserActive));
 
-      console.log(this.getUserActive)
-
       this.$toasted.show("Producto Eliminado!!", {
         theme: "bubble",
         position: "top-center",

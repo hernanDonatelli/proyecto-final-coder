@@ -78,7 +78,7 @@
                 </v-col>
                 <v-col class="py-0" xs="6">
                   <v-text-field
-                    v-model="createPrecio"
+                    v-model.number="createPrecio"
                     label="Precio"
                   ></v-text-field>
                 </v-col>

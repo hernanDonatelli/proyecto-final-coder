@@ -150,17 +150,19 @@ export default {
 
 <style scoped>
 tbody tr:hover.enviado{
-  background-color: #BCAAA4 !important;
+  background-color: #00BFA5 !important;
 }
 tbody tr:hover{
   background-color: transparent !important;
 }
 
 .enviado{
-    background-color: #BCAAA4;
-    color: #8D6E63;
+    background-color: #00BFA5;
+    color: #00695C;
+    transition: background-color .5s ease-in-out;
 }
 .no-enviado{
     background-color: white;
+    transition: background-color .5s ease-in-out;
 }
 </style>
