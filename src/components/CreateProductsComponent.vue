@@ -171,6 +171,7 @@ export default {
         stock: this.createStock,
         categoria: this.createCategoria,
         descripcion: this.createDescripcion,
+        cantidad: 1,
         ingresado: new Date().toLocaleString()
       };
 
