@@ -5,7 +5,7 @@
         <thead>
           <tr>
             <th class="text-center">Id</th>
-            <th class="text-center">Ingresado/Modificado</th>
+            <th class="text-center">Alta/Modificado</th>
             <th class="text-center">Nombre</th>
 
             <th class="text-center">Marca</th>

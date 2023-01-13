@@ -1,6 +1,6 @@
 <template>
   <v-row class="intro d-flex justify-center align-content-center">
-    <v-col xs="10" md="8">
+    <v-col xs="10" md="6">
       <h1 class="homeTitle text-center"><span>Tienda Online</span> de Productos Gourmet, Naturales y Saludables</h1>
 
       <v-stepper value="3" class="stepHeader my-10">

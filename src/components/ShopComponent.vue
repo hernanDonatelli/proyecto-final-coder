@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row class="text-left mt-5 d-flex flex-column align-center flex-md-row">
-      <v-col xs="12" md="7">
+      <v-col xs="12" md="7" lg="8">
         <h1 class="shop-title text-left my-5">
           <span>Nuestros</span>Productos
         </h1>
@@ -9,7 +9,7 @@
       </v-col>
 
       <!-- Buscadores -->
-      <v-col xs="12" sm="8" md="5">
+      <v-col xs="12" sm="9" md="5" lg="4">
         <!-- Buscador por nombre -->
         <div>
           <div id="inputSearch">
@@ -36,28 +36,20 @@
         <!-- Radio buttons -->
         <div id="checkSearch">
           <v-radio-group v-model="radioGroup" class="pl-3 mt-2">
-            <v-row class="flex-column">
-              <v-radio class="mb-0"
-                color="brown darken-1"
-                label="Todos"
-                value=""
-              ></v-radio>
-              <v-radio class="mb-0"
-                color="brown darken-1"
-                label="Inti Zen"
-                value="Inti Zen"
-              ></v-radio>
-              <v-radio class="mb-0"
-                color="brown darken-1"
-                label="Chocolate Colonial"
-                value="Chocolate Colonial"
-              ></v-radio>
-              <v-radio class="mb-0"
-                color="brown darken-1"
-                label="Cocoon"
-                value="Cocoon"
-              ></v-radio>
-            </v-row>
+              <v-row class="flex-row justify-center">
+                <v-radio
+                  class="mb-2 mx-2"
+                  color="brown darken-1"
+                  label="Todos"
+                  value=""
+                ></v-radio>
+                <v-radio v-for="marca of findMarcas" :key="marca.id"
+                  class="mb-2 mx-2"
+                  color="brown darken-1"
+                  :label="marca"
+                  :value="marca"
+                ></v-radio>
+              </v-row>
           </v-radio-group>
         </div>
 
@@ -110,6 +102,16 @@ export default {
 
       return filtered;
     },
+
+    findMarcas(){
+      const marcas = this.getProducts.map( producto => producto.marca);
+
+      let result = marcas.filter((item,index)=>{
+      return marcas.indexOf(item) === index;
+      })
+
+      return result;
+    }
   },
 };
 </script>
@@ -143,4 +145,5 @@ hr {
   top: 23%;
   right: 0;
 }
+
 </style>

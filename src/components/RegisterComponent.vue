@@ -16,6 +16,7 @@
             </v-alert>
         </div>
         <v-form id="registerForm" v-model="valid" lazy-validation>
+
             <v-text-field v-model="nombre" :counter="20" :rules="nombreRules" label="Nombre" required></v-text-field>
 
             <v-text-field v-model="apellido" :counter="20" :rules="apellidoRules" label="Apellido"
@@ -31,7 +32,8 @@
                 :rules="[rules.required, rules.min]" :type="show1 ? 'text' : 'password'" name="input-10-1"
                 label="Contraseña" hint="Minimo 6 caracteres" counter @click:append="show1 = !show1"></v-text-field>
 
-            <v-btn block color="success" :disabled="!valid" class="mr-4 mt-5" @click="postRegisterUser">
+
+            <v-btn block color="success" :disabled="!valid" class="mr-4 mt-8" @click="postRegisterUser">
                 Enviar
             </v-btn>
         </v-form>
@@ -87,13 +89,13 @@ export default {
         postRegisterUser(e) {
             e.preventDefault();
 
-            if(!this.nombre || !this.apellido || !this.movil || !this.domicilio || !this.email || !this.password){
+            if (!this.nombre || !this.apellido || !this.movil || !this.domicilio || !this.email || !this.password) {
                 this.classeEmpty = 'visible';
 
-                    setTimeout(() => {
-                        this.classeEmpty = 'hidden';
-                    }, 2500);
-            }else{
+                setTimeout(() => {
+                    this.classeEmpty = 'hidden';
+                }, 2500);
+            } else {
                 const registerUser = {
                     nombre: this.nombre,
                     apellido: this.apellido,
@@ -156,5 +158,10 @@ export default {
 </script>
 
 <style scoped>
-
+#registerForm{
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);;
+}
 </style>
