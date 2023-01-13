@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar absolute shaped color="brown darken-1" dark>
+    <v-app-bar absolute shaped color="brown darken-3" dark>
       <v-app-bar-nav-icon v-if="getUserActive()" @click="drawer = true"></v-app-bar-nav-icon>
 
       <v-toolbar-title class="text-uppercase amber--text"><router-link to="/"><span
@@ -149,7 +149,7 @@ export default {
 
 <style scoped>
 .theme--light.v-navigation-drawer {
-  background-color: #6d4c41;
+  background-color: #4E342E;
 }
 
 .v-application a {

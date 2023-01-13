@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <home-component />
+  <div id="home">
+    <v-fluid-container class="contenedor">
+      <home-component />
+    </v-fluid-container>
   </div>
 </template>
 
@@ -15,3 +17,16 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+#home{
+  height: 100vh;
+  background-image: url(@/assets/hero.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.contenedor{
+  height: 100%;
+}
+</style>
