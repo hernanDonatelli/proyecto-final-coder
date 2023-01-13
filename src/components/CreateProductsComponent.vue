@@ -1,8 +1,8 @@
 <template>
   <div>
-    <!-- Dialog para editar productos -->
+    <!-- Dialog para crear productos -->
     <v-row justify="center">
-      <v-dialog v-model="dialog" persistent max-width="700px">
+      <v-dialog v-model="dialog" max-width="700px">
         <template v-slot:activator="{ on, attrs }">
           <v-btn
             class="create-button mt-5"
@@ -84,12 +84,11 @@
                 </v-col>
               </v-row>
 
-              <v-row>
+              <v-row class="pb-15">
                 <v-col class="py-0" cols="6">
                   <v-btn
                     block
-                    text
-                    color="red darken-3 white--text"
+                    color="red accent-3 white--text"
                     class="mr-4"
                     @click="dialog = false"
                   >
@@ -98,14 +97,23 @@
                 </v-col>
                 <v-col class="py-0" cols="6">
                   <v-btn
+                    :disabled="!emptyForm"
                     block
-                    text
-                    color="success"
+                    color="teal accent-3"
                     class="mr-4"
                     @click="postCreateProduct"
                   >
                     Enviar
                   </v-btn>
+                </v-col>
+                <v-col cols="12">
+                  <transition name="fade-transition">
+                    <div v-if="!emptyForm" id="alertCreate" class="mt-3">
+                      <v-alert text type="error" icon="mdi-cloud-alert">
+                        <span class="text-caption">Tienes campos sin completar para el ingreso!</span>
+                      </v-alert>
+                    </div>
+                  </transition>
                 </v-col>
               </v-row>
             </v-container>
@@ -150,6 +158,7 @@ export default {
       createCategoria: "",
       createDescripcion: "",
       dialog: false,
+      emptyForm: true,
     };
   },
   methods: {
@@ -165,39 +174,48 @@ export default {
         ingresado: new Date().toLocaleString()
       };
 
-      const createProductAPI = async () => {
-        const options = {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newProduct),
-        };
-
-        const postProduct = await fetch(
-          "https://639c6ec816d1763ab149a523.mockapi.io/productos",
-          options
-        );
-        const response = await postProduct.json();
-        console.log(response);
+      if(!newProduct.nombre || !newProduct.marca || !newProduct.img || !newProduct.precio || !newProduct.stock || !newProduct.categoria || !newProduct.descripcion){
+        this.emptyForm = false;
 
         setTimeout(() => {
-          const form = document.getElementById("formCreate");
+          this.emptyForm = true;
+        }, 3000);
 
-          if (form) {
-            this.dialog = false;
-            document.getElementById("createSuccess").classList.remove("hidden");
-            document.getElementById("createSuccess").classList.add("visible");
-          }
+      }else{
+        const createProductAPI = async () => {
+          const options = {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newProduct),
+          };
+
+          const postProduct = await fetch(
+            "https://639c6ec816d1763ab149a523.mockapi.io/productos",
+            options
+          );
+          const response = await postProduct.json();
+          console.log(response);
 
           setTimeout(() => {
-            document.getElementById("createSuccess").classList.remove("visible");
-            document.getElementById("createSuccess").classList.add("hidden");
-            window.location.reload();
-          }, 1500);
-        }, 2500);
-      };
-      createProductAPI();
+            const form = document.getElementById("formCreate");
+
+            if (form) {
+              this.dialog = false;
+              document.getElementById("createSuccess").classList.remove("hidden");
+              document.getElementById("createSuccess").classList.add("visible");
+            }
+
+            setTimeout(() => {
+              document.getElementById("createSuccess").classList.remove("visible");
+              document.getElementById("createSuccess").classList.add("hidden");
+              window.location.reload();
+            }, 1500);
+          }, 2500);
+        };
+        createProductAPI();
+      }
     },
   },
 };
@@ -221,6 +239,7 @@ export default {
   text-transform: uppercase;
   color: #6d4c41;
   font-weight: 600;
+  padding-left: .25rem;
 }
 .title-create span {
   font-weight: 200;
@@ -230,7 +249,13 @@ hr.theme--light.v-divider {
   height: 2px;
   width: 15%;
   border-color: unset;
-  border: 2px solid #6d4c41;
+  border: 1px solid #6d4c41;
   margin-left: 5%;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0
 }
 </style>

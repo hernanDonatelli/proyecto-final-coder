@@ -2,12 +2,7 @@
   <div>
     <v-row v-if="getCartUserActive != 0" class="d-flex justify-end">
       <v-col class="mx-auto" xs="6" sm="4" lg="3">
-        <v-btn
-          @click="dialogEmpty = true"
-          class="my-5 mr-5 white--text"
-          block
-          color="red darken-2"
-        >
+        <v-btn @click="dialogEmpty = true" class="my-5 mr-5 white--text" block color="red accent-3">
           Vaciar Carrito
         </v-btn>
 
@@ -16,10 +11,8 @@
           <v-dialog
             v-model="dialogEmpty"
             overlay-color="brown darken-4"
-            max-width="600"
-            width="unset"
-          >
-            <v-card>
+            width="700">
+            <v-card class="pa-5">
               <v-card-title class="text-h5 buy-title">
                 <span>Vaciar</span>Carrito?
               </v-card-title>
@@ -34,15 +27,18 @@
               </v-card-text>
 
               <v-card-actions>
-                <v-spacer></v-spacer>
-
-                <v-btn color="red accent-2" text @click="dialogEmpty = false">
-                  Cancelar
-                </v-btn>
-
-                <v-btn color="teal accent-4" text @click="emptyCartStore()">
-                  Aceptar
-                </v-btn>
+                <v-row>
+                  <v-col cols="6">
+                    <v-btn class="white--text" color="red accent-3" block @click="dialogEmpty = false">
+                      Cancelar
+                    </v-btn>
+                  </v-col>
+                  <v-col cols="6">
+                    <v-btn color="teal accent-3" block @click="emptyCartStore()">
+                      Aceptar
+                    </v-btn>
+                  </v-col>
+                </v-row>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -69,25 +65,15 @@
           <tr v-for="(producto, index) of getCartUserActive" :key="index">
             <td>{{ index + 1 }}</td>
             <td>{{ producto.nombre }}</td>
-            <td class="alto-columna d-sm-flex align-sm-center h-100 flex-sm-wrap align-sm-content-center justify-md-center">
-                <v-icon
-                v-if="producto.cantidad >= 1"
-                @click="producto.cantidad--"
-                color="brown darken-1" class="mr-0"
-                >
+            <td
+              class="alto-columna d-sm-flex align-sm-center h-100 flex-sm-wrap align-sm-content-center justify-md-center">
+              <v-icon v-if="producto.cantidad >= 1" @click="producto.cantidad--" color="brown darken-1" class="mr-0">
                 mdi-chevron-down
-                </v-icon>
+              </v-icon>
 
-              <input
-                class="inputQuantity"
-                readonly
-                v-model.number="producto.cantidad"
-              />
+              <input class="inputQuantity" readonly v-model.number="producto.cantidad" />
 
-              <v-icon
-                @click="producto.cantidad++"
-                color="brown darken-1" class="ml-0"
-                >
+              <v-icon @click="producto.cantidad++" color="brown darken-1" class="ml-0">
                 mdi-chevron-up
               </v-icon>
 
@@ -95,24 +81,14 @@
             <td>${{ producto.precio }}</td>
 
             <td>
-              <strong
-                >${{ (producto.precio * producto.cantidad).toFixed(2) }}</strong
-              >
+              <strong>${{ (producto.precio * producto.cantidad).toFixed(2) }}</strong>
             </td>
 
             <td>
               <v-tooltip left color="error">
                 <template v-slot:activator="{ on, attrs }">
-                  <v-btn
-                    @click="deleteItem(producto.id)"
-                    :id="`btn-delete-${producto.id}`"
-                    class="ma-2"
-                    text
-                    icon
-                    color="red accent-3"
-                    v-bind="attrs"
-                    v-on="on"
-                  >
+                  <v-btn @click="deleteItem(producto.id)" :id="`btn-delete-${producto.id}`" class="ma-2" text icon
+                    color="red accent-3" v-bind="attrs" v-on="on">
                     <v-icon>mdi-delete</v-icon>
                   </v-btn>
                 </template>
@@ -127,9 +103,7 @@
     <v-row v-if="subTotalCart() != 0" class="mt-3 flex-column flex-lg-row align-lg-center">
       <v-col class="d-flex justify-center align-center order-3 order-lg-1 justify-lg-start" xs="12" lg="4">
         <v-icon id="store">mdi-arrow-left-bold-circle-outline</v-icon>
-        <router-link class="ml-3" id="buyNext" to="/shop"
-          >Seguir Comprando?</router-link
-        >
+        <router-link class="ml-3" id="buyNext" to="/shop">Seguir Comprando?</router-link>
       </v-col>
 
       <v-col xs="12" sm="6" lg="3" class="mb-5 order-2 mx-auto">
@@ -139,13 +113,8 @@
 
         <!-- Modal finalizar compra -->
         <v-row justify="center">
-          <v-dialog
-            v-model="dialog"
-            overlay-color="brown darken-4"
-            max-width="600"
-            width="unset"
-          >
-            <v-card>
+          <v-dialog v-model="dialog" overlay-color="brown darken-4" width="700">
+            <v-card class="pa-5">
               <v-card-title class="text-h5 buy-title">
                 <span>Finalizar</span>Compra?
               </v-card-title>
@@ -168,15 +137,18 @@
               </v-card-text>
 
               <v-card-actions>
-                <v-spacer></v-spacer>
-
-                <v-btn color="red accent-2" text @click="dialog = false">
-                  Cancelar
-                </v-btn>
-
-                <v-btn color="teal accent-4" text @click="dialog = postBuy()">
-                  Aceptar
-                </v-btn>
+                <v-row>
+                  <v-col cols="6">
+                    <v-btn class="white--text" color="red accent-3" block @click="dialog = false">
+                      Cancelar
+                    </v-btn>
+                  </v-col>
+                  <v-col cols="6">
+                    <v-btn color="teal accent-3" block @click="dialog = postBuy()">
+                      Aceptar
+                    </v-btn>
+                  </v-col>
+                </v-row>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -308,31 +280,38 @@ export default {
 </script>
 
 <style scoped>
-.alto-columna{
+.alto-columna {
   height: 100% !important;
 }
+
 .v-data-table {
   line-height: 4.5;
 }
+
 .inputQuantity {
   width: 20px;
   text-align: center;
 }
+
 #buyNext {
   text-decoration: none;
   color: #6d4c41;
   transition: all 0.2s ease-in-out;
 }
+
 #buyNext:hover {
   color: #ffab00;
 }
+
 #store {
   color: #6d4c41;
 }
+
 .v-application--is-ltr .v-divider--inset:not(.v-divider--vertical) {
   width: 50%;
   margin-left: 3%;
 }
+
 .buy-title,
 .buy-title span {
   letter-spacing: 0.001rem;
@@ -341,6 +320,7 @@ export default {
   color: #6d4c41;
   font-weight: 600;
 }
+
 .buy-title span {
   font-weight: 200;
 }

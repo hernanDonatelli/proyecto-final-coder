@@ -30,10 +30,11 @@
 
             <v-text-field v-model="password" :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
                 :rules="[rules.required, rules.min]" :type="show1 ? 'text' : 'password'" name="input-10-1"
-                label="Contraseña" hint="Minimo 6 caracteres" counter @click:append="show1 = !show1"></v-text-field>
+                label="Contraseña" hint="Minimo 6 caracteres" counter @click:append="show1 = !show1">
+            </v-text-field>
 
 
-            <v-btn block color="success" :disabled="!valid" class="mr-4 mt-8" @click="postRegisterUser">
+            <v-btn block color="teal accent-3" :disabled="!valid" class="mr-4 mt-8" @click="postRegisterUser">
                 Enviar
             </v-btn>
         </v-form>
@@ -140,7 +141,7 @@ export default {
                                 this.classeSuccess = 'hidden';
                                 document.getElementById('registerForm').reset();
                                 this.$router.push('/login');
-                            }, 3000);
+                            }, 3500);
                         }
 
                     };

@@ -81,12 +81,13 @@
       <v-divider class="mx-4"></v-divider>
 
       <v-card-actions>
-        <v-btn v-if="producto.stock == 0" depressed disabled> Sin Stock </v-btn>
+        <v-btn v-if="producto.stock == 0" depressed disabled tile> Sin Stock </v-btn>
         <v-btn v-else
+          class="white--text"
           @click="addToCart(producto.id)"
           :id="`btn-add-${producto.id}`"
-          color="amber darken-1"
-          text
+          color="brown darken-4"
+          tile
         >
           Agregar
         </v-btn>
