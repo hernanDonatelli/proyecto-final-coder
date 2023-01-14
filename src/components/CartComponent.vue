@@ -52,7 +52,7 @@
             <th class="text-center">#</th>
             <th class="text-center">Producto</th>
 
-            <th class="text-center">Cantidad</th>
+            <th class="text-center">Cantidad/(Stock)</th>
 
             <th class="text-center">Valor Unitario</th>
 
@@ -63,22 +63,30 @@
         </thead>
         <tbody>
           <tr v-for="(producto, index) of getCartUserActive" :key="index">
+
             <td>{{ index + 1 }}</td>
             <td>{{ producto.nombre }}</td>
             <td
-              class="alto-columna d-sm-flex align-sm-center h-100 flex-sm-wrap align-sm-content-center justify-md-center">
-              <v-icon v-if="producto.cantidad >= 1" @click="producto.cantidad--" color="brown darken-1" class="mr-0">
-                mdi-chevron-down
-              </v-icon>
+              class="alto-columna ">
+              <div class="d-sm-flex align-sm-center h-100 flex-sm-wrap align-sm-content-center justify-md-center">
 
-              <input class="inputQuantity" readonly v-model.number="producto.cantidad" />
+                <v-icon :disabled="producto.cantidad == 0" @click="producto.cantidad--" color="brown darken-1" class="mr-0">
+                  mdi-chevron-down
+                </v-icon>
 
-              <v-icon @click="producto.cantidad++" color="brown darken-1" class="ml-0">
-                mdi-chevron-up
-              </v-icon>
+                <input class="inputQuantity" readonly v-model.number="producto.cantidad" />
+
+                <v-icon :disabled="producto.cantidad >= producto.stock" @click="producto.cantidad++" color="brown darken-1" class="ml-0">
+                  mdi-chevron-up
+                </v-icon>
+
+                <p class="ma-0 text-caption">({{ producto.stock - producto.cantidad }})</p>
+              </div>
 
             </td>
-            <td>${{ producto.precio }}</td>
+            <td>
+              ${{ producto.precio }}
+            </td>
 
             <td>
               <strong>${{ (producto.precio * producto.cantidad).toFixed(2) }}</strong>
@@ -100,7 +108,7 @@
       </template>
     </v-simple-table>
 
-    <v-row v-if="subTotalCart() != 0" class="mt-3 flex-column flex-lg-row align-lg-center">
+    <v-row v-if="!getCartUserActive.length == 0" class="mt-3 flex-column flex-lg-row align-lg-center">
       <v-col class="d-flex justify-center align-center order-3 order-lg-1 justify-lg-start" xs="12" lg="4">
         <v-icon id="store">mdi-arrow-left-bold-circle-outline</v-icon>
         <router-link class="ml-3" id="buyNext" to="/shop">Seguir Comprando?</router-link>
@@ -192,6 +200,7 @@ export default {
     return {
       dialog: false,
       dialogEmpty: false,
+
     };
   },
 
@@ -229,7 +238,33 @@ export default {
       });
     },
 
+    vendidos(id, cantidad, stock){
+      stock = stock - cantidad;
 
+      console.log((`${id} - ${stock}`));
+
+      const upSales = {
+        id: id,
+        stock: stock
+      }
+
+      const updatedStockProduct = async() => {
+        const options = {
+          method: 'PUT',
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(upSales)
+        }
+
+        const fetchUpdate = await fetch(`https://639c6ec816d1763ab149a523.mockapi.io/productos/${upSales.id}`, options);
+        const response = await fetchUpdate.json();
+
+        return response;
+      }
+
+      updatedStockProduct();
+    },
 
     postBuy() {
       const individualBuy = {
@@ -271,10 +306,24 @@ export default {
         });
       };
       upBuyAPI();
+
+      individualBuy.userCart.filter(item => {
+
+        const datos = {
+          id: item.id,
+          cantidad: item.cantidad,
+          stock: item.stock
+        };
+
+        this.vendidos(datos.id, datos.cantidad, datos.stock);
+      })
+
     },
+
   },
   computed: {
     ...mapGetters(["getCartUserActive", "getUserActive"]),
+
   },
 };
 </script>

@@ -22,7 +22,6 @@
                   <v-col>
                     <div class="d-flex flex-column align-start">
                       <v-card-title class="pl-0 py-0">{{ producto.nombre }}</v-card-title>
-                      <!-- <v-icon class="heart">mdi-heart</v-icon> -->
 
                       <p class="descripcion mt-2 mb-0 body-2">{{ producto.descripcion }}</p>
                     </div>
@@ -46,9 +45,12 @@
                     <p class="price pl-0">${{ producto.precio }}</p>
 
                     <v-card-text class="pl-0">
-                      <v-row align="center" class="mx-0">
+                      <v-row align="center" class="mx-0 d-flex justify-space-between">
                         <div class="my-2 body-2">
                           {{ producto.marca }} • {{ producto.categoria }}
+                        </div>
+                        <div class="my-2 body-2">
+                          Stock: {{ producto.stock }}
                         </div>
                       </v-row>
                     </v-card-text>

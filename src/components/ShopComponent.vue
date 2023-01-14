@@ -55,7 +55,6 @@
 
       </v-col>
     </v-row>
-
     <v-row>
       <card-component
         :producto="producto"
@@ -88,6 +87,7 @@ export default {
   },
   methods: {
     ...mapActions(["getProductsAPI"]),
+
   },
   computed: {
     ...mapGetters(["getProducts"]),
@@ -111,7 +111,7 @@ export default {
       })
 
       return result;
-    }
+    },
   },
 };
 </script>
