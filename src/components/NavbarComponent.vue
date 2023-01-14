@@ -3,10 +3,19 @@
     <v-app-bar absolute shaped color="brown darken-3" dark>
       <v-app-bar-nav-icon v-if="getUserActive()" @click="drawer = true"></v-app-bar-nav-icon>
 
-      <v-toolbar-title class="text-uppercase amber--text"><router-link to="/"><span
-            class="font-weight-light">Tienda</span><span
-            class="font-weight-black">Gourmet</span></router-link></v-toolbar-title>
-      <v-spacer></v-spacer>
+      <v-toolbar-title class="text-uppercase amber--text">
+        <router-link v-if="getUserActive() === null" to="/">
+          <span class="font-weight-light">Tienda</span><span class="font-weight-black">Gourmet</span>
+        </router-link>
+        <router-link v-else-if="!getUserActive().admin" to="/">
+          <span class="font-weight-light">Tienda</span><span class="font-weight-black">Gourmet</span>
+        </router-link>
+        <router-link v-else to="/admin-dashboard">
+          <span class="font-weight-light">Admin</span><span class="font-weight-black">Board</span>
+        </router-link>
+      </v-toolbar-title>
+
+        <v-spacer></v-spacer>
 
       <div v-if="!getUserActive()">
         <v-row>

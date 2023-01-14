@@ -47,6 +47,12 @@ const routes = [
     component: () => import('../views/ShopView.vue')
   },
   {
+    path: '/admin-dashboard',
+    name: 'admin-dashboard',
+    component: () => import('../views/AdminView.vue'),
+    meta: { requiresAuth: true }
+  },
+  {
     path: '/admin-usuarios',
     name: 'admin-usuarios',
     component: () => import('../views/TableUsersView.vue'),
@@ -85,6 +91,8 @@ router.beforeEach((to, from, next) => {
       if (JSON.parse(localStorage.userLoged).admin){
         next();
       }else{
+        store.state.userActive = null;
+        localStorage.clear();
         next('/acceso-denegado');
       }
     }

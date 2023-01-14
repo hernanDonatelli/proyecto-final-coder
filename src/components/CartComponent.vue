@@ -238,10 +238,9 @@ export default {
       });
     },
 
+    //Metodo para capturar el item vendido y su stock remanente
     vendidos(id, cantidad, stock){
       stock = stock - cantidad;
-
-      console.log((`${id} - ${stock}`));
 
       const upSales = {
         id: id,
@@ -266,6 +265,7 @@ export default {
       updatedStockProduct();
     },
 
+    //Envio a la API el pedido de compra
     postBuy() {
       const individualBuy = {
         idCliente: this.getUserActive.id,
@@ -307,6 +307,7 @@ export default {
       };
       upBuyAPI();
 
+      //Actualizacion del stock de cada producto
       individualBuy.userCart.filter(item => {
 
         const datos = {

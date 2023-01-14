@@ -71,7 +71,7 @@
       <v-dialog v-model="dialog" max-width="700px">
         <v-card>
           <v-card-title>
-            <span class="text-h5 title-edit"><span>Crear</span>Producto</span>
+            <span class="text-h5 title-edit"><span>Editar</span>Producto</span>
           </v-card-title>
 
           <v-divider color="brown darken-1" />

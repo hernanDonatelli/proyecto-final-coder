@@ -17,6 +17,8 @@
 
                 <th class="text-center">Domicilio</th>
 
+                <th class="text-center">Movil</th>
+
                 <th class="text-center">Editar</th>
               </tr>
             </thead>
@@ -28,6 +30,7 @@
                 <td>{{ getUserActive.email }}</td>
                 <td>{{ getUserActive.password }}</td>
                 <td>{{ getUserActive.domicilio }}</td>
+                <td>{{ getUserActive.movil }}</td>
                 <td>
                   <v-btn
                     @click="selectUser(getUserActive.id)"
@@ -48,13 +51,16 @@
 
         <!-- Dialog para editar usuario -->
         <v-row justify="center">
-          <v-dialog v-model="dialog" persistent max-width="600px">
-            <v-card>
+          <v-dialog v-model="dialog" max-width="700px">
+            <v-card class="pa-5">
               <v-card-title>
-                <span color="brown darken-1" class="text-h5 text-uppercase"
+                <span color="brown darken-1" class="text-h5 text-uppercase title-edit"
                   >Editar Usuario</span
                 >
               </v-card-title>
+
+              <v-divider class="hr-edit" color="brown darken-1" />
+
               <v-card-text>
                 <v-container>
                   <v-row>
@@ -86,23 +92,35 @@
                         ></v-text-field>
                       </v-col>
 
-                      <v-col cols="12">
+                      <v-col cols="6">
                         <v-text-field
                         v-model="domicilio"
                         label="Domicilio"
+                      ></v-text-field>
+                    </v-col>
+
+                    <v-col cols="6">
+                        <v-text-field
+                        v-model="movil"
+                        label="Movil"
                       ></v-text-field>
                     </v-col>
                   </v-row>
                 </v-container>
               </v-card-text>
               <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="red darken-1" text @click="dialog = false">
+                <v-row class="pb-10">
+              <v-col cols="6">
+                <v-btn class="white--text" block color="red accent-3" @click="dialog = false">
                   Cancelar
                 </v-btn>
-                <v-btn color="teal darken-3" text @click="putEditUser">
+              </v-col>
+              <v-col cols="6">
+                <v-btn block color="teal accent-3" @click="putEditUser">
                   Guardar
                 </v-btn>
+              </v-col>
+            </v-row>
               </v-card-actions>
             </v-card>
           </v-dialog>
@@ -124,6 +142,7 @@
         <thead>
           <tr>
             <th class="text-center">Id Pedido</th>
+            <th class="text-center">Fecha</th>
             <th class="text-center">Domicilio</th>
             <th class="text-center">Compra</th>
             <th class="text-center">Importe</th>
@@ -134,6 +153,7 @@
         <tbody>
           <tr v-for="(pedido, index) in historialPedidos()" :key="index">
             <td>{{ pedido.id }}</td>
+            <td>{{ pedido.fechaPedido }}</td>
             <td>{{ pedido.domicilioCliente }}</td>
             <td>
               <v-tooltip
@@ -185,7 +205,8 @@ export default {
         apellido: "",
         email: "",
         password: "",
-        domicilio: ""
+        domicilio: "",
+        movil: ""
     };
   },
   created() {
@@ -205,6 +226,7 @@ export default {
       this.email = idSeleccionado.email;
       this.password = idSeleccionado.password;
       this.domicilio = idSeleccionado.domicilio;
+      this.movil = idSeleccionado.movil;
     },
 
     putEditUser() {
@@ -215,6 +237,7 @@ export default {
         email: this.email,
         password: this.password,
         domicilio: this.domicilio,
+        movil: this.movil,
         userCart: this.getCartUserActive
       };
 
@@ -278,5 +301,27 @@ hr {
   width: 10%;
   margin: 1rem auto 0.5rem;
   border: 1.5px solid black;
+}
+
+.title-edit,
+.title-edit span {
+  letter-spacing: 0.001rem;
+  font-family: Roboto;
+  text-transform: uppercase;
+  color: #6d4c41;
+  font-weight: 600;
+  padding-left: .25rem;
+}
+.title-edit span {
+  font-weight: 200;
+}
+hr.hr-edit.theme--light.v-divider {
+  display: block;
+  height: 2px;
+  width: 15%;
+  border-color: unset;
+  border: 1px solid #6d4c41;
+  margin-left: 5%;
+  margin-top: 0;
 }
 </style>
