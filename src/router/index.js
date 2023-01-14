@@ -76,6 +76,11 @@ const routes = [
     component: () => import('../views/PedidosView.vue'),
     meta: {requiresAuth: true}
   },
+   {
+    path: '*',
+    name: 'error-404',
+    component: () => import('../views/404View.vue')
+  }
 ]
 
 const router = new VueRouter({
