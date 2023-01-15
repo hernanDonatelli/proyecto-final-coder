@@ -51,11 +51,11 @@
     background-color: transparent !important;
     border: 1px solid rgba(255, 179, 0, .5);
     transition: border-color .2s ease-in-out;
-    color: rgba(255, 179, 0, .7);
     font-family: Rubik;
     text-transform: uppercase;
 }
 .v-card__title{
+    color: rgba(255, 179, 0, .7) !important;
     font-weight: 300;
     background-color: transparent !important;
 }
