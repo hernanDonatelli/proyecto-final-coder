@@ -66,8 +66,8 @@
 }
 
 .adminCard:hover i,
-.adminCard:hover{
-    color: #FFA000;
+.adminCard:hover .v-card__title{
+    color: #FFA000 !important;
     border-color: #FFA000;
 }
 </style>
