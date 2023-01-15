@@ -146,7 +146,7 @@ export default {
 
     logOut() {
       this.logOutUser();
-
+      localStorage.clear();
       this.$router.push("/");
     },
   },

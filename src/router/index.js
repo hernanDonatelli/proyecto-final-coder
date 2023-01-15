@@ -8,77 +8,71 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'Home',
     component: HomeView
   },
   {
     path: '/shop',
-    name: 'shop',
+    name: 'La Tienda',
     component: () => import('../views/ShopView.vue')
   },
   {
     path: '/myCart',
-    name: 'cart',
+    name: 'Mi Carrito',
     component: () => import('../views/CartView.vue')
   },
   {
     path: '/login',
-    name: 'login',
+    name: 'Login',
     component: () => import('../views/LoginView.vue')
   },
   {
     path: '/register',
-    name: 'register',
+    name: 'Registro',
     component: () => import('../views/RegisterView.vue')
   },
   {
     path: '/mi-cuenta',
-    name: 'cuenta',
+    name: 'Mi Cuenta',
     component: () => import('../views/UserAccountView.vue')
   },
   {
     path: '/acceso-denegado',
-    name: 'acceso-denegado',
+    name: 'Acceso Denegado',
     component: () => import('../views/AccesoRestringidoView.vue')
   },
   {
     path: '/producto/:id',
-    name: 'producto',
+    name: 'Producto',
     component: () => import('../views/ShopView.vue')
   },
   {
     path: '/admin-dashboard',
-    name: 'admin-dashboard',
+    name: 'Dashboard',
     component: () => import('../views/AdminView.vue'),
     meta: { requiresAuth: true }
   },
   {
     path: '/admin-usuarios',
-    name: 'admin-usuarios',
+    name: 'Admin Usuarios',
     component: () => import('../views/TableUsersView.vue'),
     meta: {requiresAuth: true}
   },
   {
     path: '/admin-productos',
-    name: 'admin-productos',
+    name: 'Admin Productos',
     component: () => import('../views/TableProductsView.vue'),
     meta: {requiresAuth: true}
   },
   {
-    path: '/admin-create-productos',
-    name: 'admin-create-productos',
-    component: () => import('../views/CreateProductsView.vue'),
-    meta: {requiresAuth: true}
-  },
-  {
     path: '/admin-pedidos',
-    name: 'admin-pedidos',
+    name: 'Admin Pedidos',
     component: () => import('../views/PedidosView.vue'),
     meta: {requiresAuth: true}
   },
    {
     path: '*',
-    name: 'error-404',
+    name: 'Error 404',
     component: () => import('../views/404View.vue')
   }
 ]
@@ -94,6 +88,7 @@ router.beforeEach((to, from, next) => {
       next('/login');
     }else{
       if (JSON.parse(localStorage.userLoged).admin){
+        document.title = `${process.env.VUE_APP_TITLE} - ${to.name}`
         next();
       }else{
         store.state.userActive = null;
@@ -102,6 +97,7 @@ router.beforeEach((to, from, next) => {
       }
     }
   }else{
+    document.title = `${process.env.VUE_APP_TITLE} - ${to.name}`
     next();
   }
 })
