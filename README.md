@@ -1,5 +1,6 @@
 <h1>Proyecto Ecommerce Vue.js</h1>
 <p>Proyecto personal de una app ecommerce para el curso de Vue.js de Coderhouse. Se simula una Tienda Gourmet online con modalidad de envío a domicilio. El sitio es Full Responsive, adaptado para mobile, tablet y desktop.</p>
+<p>El proyecto funcionando: https://clinquant-eclair-bd6726.netlify.app/</p>
 
 <h2>Tecnologías Utilizadas</h2>
 
