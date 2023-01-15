@@ -1,5 +1,13 @@
 <template>
   <v-container>
+    <v-row class="mb-3">
+      <v-col xs="12" sm="8" md="4" id="inputSearch">
+        <v-text-field  v-model="buscado" placeholder="Buscar articulo por nombre o marca" hint="Ingrese nombre o marca" />
+
+        <v-icon class="searchIcon">mdi-magnify</v-icon>
+      </v-col>
+    </v-row>
+
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -22,7 +30,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="product in getProducts" :key="product.id">
+          <tr v-for="product in searchProduct" :key="product.id">
             <td>{{ product.id }}</td>
             <td>{{ product.ingresado }}</td>
             <td>{{ product.nombre }}</td>
@@ -179,6 +187,7 @@ export default {
       ingresado: null,
       id: null,
       descripcion: "",
+      buscado: ""
     };
   },
 
@@ -275,6 +284,15 @@ export default {
   },
   computed: {
     ...mapGetters(["getProducts"]),
+
+    searchProduct(){
+      const search = this.getProducts.filter(
+        item => item.nombre.toLowerCase().includes(this.buscado.toLowerCase()) ||
+                item.marca.toLowerCase().includes(this.buscado.toLowerCase())
+      );
+
+      return search;
+    }
   },
 };
 </script>
@@ -302,5 +320,13 @@ hr.theme--light.v-divider {
   border-color: unset;
   border: 1px solid #6d4c41;
   margin-left: 5%;
+}
+#inputSearch {
+  position: relative;
+}
+.searchIcon {
+  position: absolute;
+  top: 23%;
+  right: 0;
 }
 </style>

@@ -1,9 +1,8 @@
 <template>
     <div id="adminHome">
         <v-container fill-height>
-            <v-row>
-                <v-spacer></v-spacer>
-                <v-col xs="10" md="3">
+            <v-row class="d-flex flex-column align-center justify-center mt-5 flex-md-row">
+                <v-col cols="10" sm="6" md="3" xl="2">
                     <v-card to="/admin-productos" shaped class="adminCard d-flex flex-column align-center justify-center">
                         <v-icon>mdi-store</v-icon>
                         <v-card-title class="pa-0">
@@ -11,7 +10,7 @@
                         </v-card-title>
                     </v-card>
                 </v-col>
-                <v-col xs="10" md="3">
+                <v-col cols="10" sm="6" md="3" xl="2">
                     <v-card to="/admin-usuarios" shaped class="adminCard d-flex flex-column align-center justify-center">
                         <v-icon>mdi-account-group</v-icon>
                         <v-card-title class="pa-0">
@@ -19,7 +18,7 @@
                         </v-card-title>
                     </v-card>
                 </v-col>
-                <v-col xs="10" md="3">
+                <v-col cols="10" sm="6" md="3" xl="2">
                     <v-card to="/admin-pedidos" shaped class="adminCard d-flex flex-column align-center justify-center">
                         <v-icon>mdi-truck-delivery</v-icon>
                         <v-card-title class="pa-0">
@@ -27,7 +26,6 @@
                         </v-card-title>
                     </v-card>
                 </v-col>
-                <v-spacer></v-spacer>
             </v-row>
         </v-container>
     </div>
@@ -49,11 +47,16 @@
 }
 
 .adminCard{
-    height: 200px;
+    height: 150px;
     background-color: transparent;
     border: 1px solid rgba(255, 179, 0, .5);
     transition: border-color .2s ease-in-out;
     color: rgba(255, 179, 0, .7);
+    font-family: Rubik;
+    text-transform: uppercase;
+}
+.v-card__title{
+    font-weight: 300;
 }
 
 .adminCard i{

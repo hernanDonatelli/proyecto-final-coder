@@ -1,5 +1,34 @@
 <template>
   <div>
+    <v-row>
+      <v-col xs="12" sm="8" md="4">
+        <div id="checkSearch">
+          <v-radio-group @change="filterSends" v-model="radioGroup" class="mt-2">
+              <v-row>
+                <v-radio
+                  class="mb-2 mx-2"
+                  color="brown darken-1"
+                  label="Todos"
+                  value=""
+                ></v-radio>
+                <v-radio
+                  class="mb-2 mx-2"
+                  color="brown darken-1"
+                  label="Enviados"
+                  :value="true"
+                ></v-radio>
+                <v-radio
+                  class="mb-2 mx-2"
+                  color="brown darken-1"
+                  label="No Enviados"
+                  :value="false"
+                ></v-radio>
+              </v-row>
+          </v-radio-group>
+        </div>
+      </v-col>
+    </v-row>
+
     <v-simple-table dense fixed-header class="text-center">
       <template v-slot:default>
         <thead>
@@ -15,7 +44,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr :class="pedido.enviado ? classEnviado : classNoEnviado" v-for="(pedido, index) in getPedidosStore()" :key="index">
+          <tr :class="pedido.enviado ? classEnviado : classNoEnviado" v-for="(pedido, index) in filterSends()" :key="index">
             <td>{{ pedido.id }}</td>
             <td>{{ pedido.fechaPedido }}</td>
             <td>{{ pedido.nombreCliente }} {{ pedido.apellidoCliente }}</td>
@@ -80,7 +109,8 @@ export default {
       pagado: null,
       enviado: null,
       classEnviado: 'enviado',
-      classNoEnviado: 'no-enviado'
+      classNoEnviado: 'no-enviado',
+      radioGroup: ''
     }
   },
   created() {
@@ -143,7 +173,28 @@ export default {
 
       this.editarEstadoCompra(editedEnviado);
 
-    }
+    },
+
+    filterSends() {
+      let filtered = this.getPedidosStore().filter(
+        (item) => {
+
+          if(this.radioGroup === ''){
+            return item;
+          }
+
+          if(this.radioGroup === true){
+            return item.enviado === true;
+          }
+
+          if(this.radioGroup === false){
+            return item.enviado === false;
+          }
+      });
+
+      return filtered;
+
+    },
   },
 };
 </script>
